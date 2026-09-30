@@ -37,8 +37,8 @@ section{padding-block:56px}
 .head p{color:var(--ink-2);max-width:40em}
 .dark .head p{color:var(--night-sub)}
 .note{font-size:13px;color:var(--ink-3)}
-.sim-help .for-mouse{display:none}
-@media (hover:hover) and (pointer:fine){.sim-help .for-touch{display:none}.sim-help .for-mouse{display:inline}}
+.sim-help{display:grid;gap:4px}
+.sim-help b{color:var(--ink-2)}
 .dark{background:var(--night);color:var(--night-text)}
 .tint{background:var(--ground-2)}
 .sub-title{font-size:20px;font-weight:700;margin:48px 0 16px}
@@ -350,8 +350,12 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
       <div id="simulator" class="sim-slot">
         <div class="eyebrow">방음부스 미리보기</div>
         <h3>우리 방에 들어갈 부스를 미리 그려보세요</h3>
-        <iframe class="sim-frame" id="sim-frame" src="simulator.html" title="방음부스 미리보기" loading="lazy"></iframe>
-        <p class="note sim-help"><span class="for-touch">한 손가락으로 끌어서 돌리고, 두 손가락으로 벌려서 확대해 보세요. 벽을 터치하면 타공판을 놓거나 뺄 수 있어요.</span><span class="for-mouse">마우스로 끌어서 돌리고, 스크롤로 확대해 보세요. 벽을 클릭하면 타공판을 놓거나 뺄 수 있어요.</span><br>실제 시공은 실측 후 확정돼요.</p>
+        <iframe class="sim-frame" id="sim-frame" src="simulator.html?v=20260930-2" title="방음부스 미리보기" loading="lazy"></iframe>
+        <div class="note sim-help">
+          <p><b>모바일 :</b> 한 손가락으로 끌어서 돌리고, 두 손가락으로 벌려서 확대해요. 벽을 터치하면 타공판을 놓거나 뺄 수 있어요.</p>
+          <p><b>데스크탑 :</b> 마우스로 끌어서 돌리고, 스크롤로 확대해요. 벽을 클릭하면 타공판을 놓거나 뺄 수 있어요.</p>
+          <p>실제 시공은 실측 후 확정돼요.</p>
+        </div>
       </div>
       <div id="measure" class="box">
         <div class="eyebrow">실측신청</div>

@@ -57,6 +57,7 @@ section{padding-block:56px}
 .hero-copy{display:flex;flex-direction:column;gap:18px}
 .hero h1{font-size:clamp(30px,5.6vw,60px);line-height:1.3}
 .hero p{font-size:clamp(16px,1.8vw,19px);line-height:1.75;color:var(--night-sub);max-width:32em}
+@media (max-width:719px){.hero p{font-size:min(16px,calc((100vw - 2*var(--gutter))/24));word-break:keep-all}}
 .btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 20px;border-radius:10px;font-size:16px;font-weight:700}
 .btn-main{background:var(--dawn);color:var(--night)}
@@ -201,7 +202,7 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
       <div class="hero-copy">
         <div class="eyebrow">조립식 고정형 방음부스</div>
         <h1>새벽처럼 고요한 방음<br>새벽방음입니다🌙</h1>
-        <p>우리 집 공간에 맞춰 설계하고 직접 시공하는 방음부스. 자가는 물론, 벽에 흔적을 남기기 어려운 월세·전세집까지.<br>현직 음악PD가 직접 시공하는 전문적인 방음부스.</p>
+        <p>우리 집 공간에 맞춰 설계하고 직접 시공하는 방음부스.<br>자가는 물론, 벽에 흔적을 남기기 어려운 월세·전세집까지.<br>현직 음악PD가 직접 시공하는 전문적인 방음부스.</p>
         <div class="btns">
           <a class="btn btn-main" href="#quote">견적문의</a>
           <a class="btn btn-line" href="#measure">실측신청</a>

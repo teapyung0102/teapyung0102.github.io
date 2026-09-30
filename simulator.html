@@ -585,11 +585,11 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
 };(function(){
   var FIN_T = 10;                                  // 마감재(아트보드 9t) 두께로 보는 값
   var BOOTH = {
-    // 벽 두께는 아트보드(9t ≈ 10mm)까지 포함 — 외경 2000 → 싱글 내경 1810 · 슈퍼싱글 1750
-    // 더블 = 바깥 싱글 판(아트보드 없이 85) + 공기층 40 + 안쪽 슈퍼싱글 벽(125)
+    // 벽 두께는 아트보드(9t ≈ 10mm)까지 포함 — 외경 2000 → 싱글 내경 1810 · 슈퍼싱글 1790
+    // 더블 = 바깥 싱글 판(아트보드 없이 85) + 공기층 35 + 안쪽 슈퍼싱글 벽(105)
     single: { name:'싱글부스',     wall:95,  cap:80  },
-    super:  { name:'슈퍼싱글부스', wall:125, cap:80  },
-    double: { name:'더블부스',     wall:250, cap:160, layers:[85,40,125] }
+    super:  { name:'슈퍼싱글부스', wall:105, cap:80  },
+    double: { name:'더블부스',     wall:225, cap:160, layers:[85,35,105] }
   };
   var PALETTE = {
     wall: [ { name:'연베이지', hex:'#D6C9B8' }, { name:'검정', hex:'#0C0D0F' } ],
@@ -1303,7 +1303,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
       d:'M0,0 H'+W+' V'+D+' H0 Z M'+t+','+t+' V'+(D-t)+' H'+(W-t)+' V'+t+' Z',
       'fill-rule':'evenodd', fill:ink, 'fill-opacity':0.11,
       stroke:ink, 'stroke-width':LW2, 'stroke-opacity':0.85 }));
-    if (d.b.layers){                                  // 더블부스: 85 + 에어갭 40 + 125
+    if (d.b.layers){                                  // 더블부스: 85 + 에어갭 35 + 105
       var off = [d.b.layers[0], d.b.layers[0]+d.b.layers[1]];
       off.forEach(function(o){
         BG.appendChild(mkel('rect', { x:o, y:o, width:W-o*2, height:D-o*2, fill:'none',

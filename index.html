@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>새벽방음</title>
+<meta name="description" content="새벽처럼 고요한 방음, 새벽방음. 조립식 고정형 방음부스 제작·시공.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@700;900&display=swap">
+<style>
+:root{
+  --night:#171A28; --night-2:#262A3C; --night-line:#4A4F66; --night-text:#F5F1EA; --night-sub:#C9C4BA; --night-mute:#8A8FA3;
+  --dawn:#E08A4A; --dawn-ink:#B4561F;
+  --ground:#F5F1EA; --ground-2:#ECE6DB; --card:#FFFFFF; --line:#E3DCD0;
+  --ink:#1C1E26; --ink-2:#4A4C55; --ink-3:#6A6C74; --ph:#DCD4C6; --ph-text:#7E786C;
+  --serif:'Noto Serif KR','Nanum Myeongjo',serif;
+  --sans:'IBM Plex Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --gutter:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:3px solid var(--dawn);outline-offset:3px;border-radius:6px}
+h1,h2,h3{margin:0}
+h1,h2{font-family:var(--serif);font-weight:900;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:var(--gutter)}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;color:var(--dawn-ink)}
+.dark .eyebrow{color:var(--dawn)}
+section{padding-block:56px}
+.head{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.head h2{font-size:clamp(26px,4.2vw,40px);line-height:1.3}
+.head p{color:var(--ink-2);max-width:40em}
+.dark .head p{color:var(--night-sub)}
+.note{font-size:13px;color:var(--ink-3)}
+.dark{background:var(--night);color:var(--night-text)}
+.tint{background:var(--ground-2)}
+.sub-title{font-size:20px;font-weight:700;margin:48px 0 16px}
+
+/* 상단 + 탭 */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--night);color:var(--night-text);border-bottom:1px solid #23273A}
+.top .wrap{display:flex;flex-direction:column}
+.brand{height:52px;display:flex;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:900;font-size:20px}
+.mark{width:28px;height:28px;border-radius:50%;border:2px solid var(--dawn);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;flex:none}
+.mark i{width:14px;height:7px;background:var(--dawn);border-radius:7px 7px 0 0}
+.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding-bottom:10px}
+.tabs a{display:flex;align-items:center;justify-content:center;min-height:36px;padding:0 4px;border:1px solid var(--night-line);border-radius:999px;font-size:13px;font-weight:600;color:var(--night-sub);white-space:nowrap}
+.tabs a:hover{color:var(--night-text);border-color:var(--night-sub)}
+.tabs a.hl{background:var(--dawn);border-color:var(--dawn);color:var(--night)}
+
+/* 히어로 */
+.hero{padding-block:48px 56px}
+.hero .wrap{display:grid;gap:28px}
+.hero-copy{display:flex;flex-direction:column;gap:18px}
+.hero h1{font-size:clamp(30px,5.6vw,60px);line-height:1.3}
+.hero p{font-size:clamp(16px,1.8vw,19px);line-height:1.75;color:var(--night-sub);max-width:32em}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 20px;border-radius:10px;font-size:16px;font-weight:700}
+.btn-main{background:var(--dawn);color:var(--night)}
+.btn-line{border:1.5px solid var(--night-line);color:var(--night-text);font-weight:600}
+.ph{background:var(--ph);color:var(--ph-text);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:14px;max-width:100%}
+.hero .ph{background:var(--night-2);color:var(--night-mute);border:1.5px dashed var(--night-line);aspect-ratio:6/5}
+
+/* 사진 페이드 전환 */
+.fader{position:relative;overflow:hidden}
+.fader .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 1.2s ease-in-out}
+.fader .slide.on{opacity:1}
+.fader img{width:100%;height:100%;object-fit:cover;display:block}
+.ph-t{text-align:center;line-height:1.5}
+.ph-t small{font-size:11px;opacity:.75}
+.fader.has{border-style:solid;border-color:transparent}
+@media (prefers-reduced-motion:reduce){.fader .slide{transition:none}}
+
+/* 회사소개 */
+.points{display:grid;gap:12px}
+.pt{padding:24px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:8px}
+.pt h3{font-size:18px}
+.pt p{font-size:15px;color:var(--ink-2)}
+.booths{display:grid;gap:16px}
+.booth{background:var(--card);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.booth .ph{border-radius:0;aspect-ratio:16/9}
+.booth-body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.booth h3{font-size:22px}
+.booth p{font-size:15px;line-height:1.7;color:var(--ink-2)}
+.price{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
+.price b{font-size:26px}
+.price span{color:var(--ink-3);font-size:15px}
+.specs{margin-top:16px;display:grid;gap:4px;font-size:14px;color:var(--ink-2)}
+.specs b{color:var(--ink);font-weight:600;margin-right:6px}
+.swatch-group{display:flex;flex-direction:column;gap:12px}
+.swatch-group h4{margin:0;font-size:15px}
+.swatch-group h4 small{font-weight:400;color:var(--ink-3);font-size:13px;margin-left:4px}
+.swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 10px}
+.sw{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);text-align:center}
+.sw i{display:block;width:100%;max-width:72px;aspect-ratio:1;border-radius:12px;border:1px solid #D6CFC2}
+.sw.wide i{aspect-ratio:4/3;max-width:100px}
+.colors{display:grid;gap:28px}
+
+/* 시공사례 */
+.cases{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+.case{display:flex;flex-direction:column;gap:6px}
+.case .ph{aspect-ratio:4/3;border:1.5px dashed #BDB3A2;font-size:13px}
+.case b{font-size:16px;margin-top:4px}
+.case span{font-size:13px;color:var(--ink-3)}
+.case em{font-style:normal;font-size:13px;font-weight:600;color:var(--dawn-ink)}
+.case:hover b{text-decoration:underline}
+.blog-btn{margin-top:28px;display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:10px;background:var(--night);color:var(--night-text);font-weight:700;font-size:15px}
+@media (min-width:720px){.blog-btn{display:inline-flex}}
+
+/* 견적문의 · 실측신청 */
+.two{display:grid;gap:16px}
+.box{padding:24px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:14px}
+.box h3{font-size:18px}
+.checks{margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:15px;color:var(--ink-2)}
+.checks li{display:flex;gap:10px;align-items:flex-start}
+.checks svg{flex:none;margin-top:4px;color:var(--dawn-ink)}
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--ink-2)}
+.steps li::before{content:counter(s);flex:none;width:28px;height:28px;border-radius:50%;background:var(--night);color:var(--night-text);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.steps b{display:block;color:var(--ink);font-size:16px}
+.notice{padding:16px 18px;background:#FBF1E8;border:1px solid #EFCFB4;border-radius:12px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.notice b{color:var(--dawn-ink);font-size:14px}
+.notice strong{color:var(--ink)}
+.notice a{color:var(--dawn-ink);font-weight:600;font-size:14px}
+.sim-slot{order:2;padding:24px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:14px}
+.sim-slot h3{font-size:18px}
+.sim-frame{display:block;width:100%;height:1100px;border:0;border-radius:12px;background:#F3F4F3}
+.sim-area{min-height:280px;border:1.5px dashed #BDB3A2;border-radius:12px;background:var(--ground);display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--ph-text);font-size:14px}
+#quote{order:1}
+#measure{order:3}
+.row-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.rb{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:10px;font-weight:700;font-size:15px}
+.rb.main{background:var(--dawn);color:var(--night)}
+.rb.line{border:1.5px solid var(--line);color:var(--ink)}
+
+/* Contact */
+.contact-grid{display:grid;gap:10px}
+.cbtn{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:68px;padding:10px 22px;border-radius:12px}
+.cbtn small{font-size:13px;font-weight:600}
+.cbtn strong{font-size:18px}
+.cbtn.main{background:var(--dawn);color:var(--night)}
+.cbtn.line{border:1.5px solid var(--night-line)}
+.cbtn.line small{color:var(--night-sub)}
+.info{margin-top:28px;display:grid;gap:8px;font-size:15px;color:var(--night-sub)}
+.info b{color:var(--night-text);font-weight:600;display:inline-block;min-width:80px}
+
+footer{background:#10121C;color:var(--night-mute);font-size:13px;line-height:1.8;padding-block:28px}
+footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
+
+@media (min-width:720px){
+  :root{--gutter:40px}
+  section{padding-block:88px}
+  .points,.booths{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .two{grid-template-columns:1fr 1fr}
+  .sim-slot{grid-column:1/-1;order:3}
+  #measure{order:2}
+  .sim-area{min-height:360px}
+  .cases{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 20px}
+  .swatches{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .colors{grid-template-columns:1fr 1fr}
+  .colors .full{grid-column:1/-1}
+  .colors .half .swatches{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .contact-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .btns{display:flex}
+}
+@media (min-width:1000px){
+  :root{--gutter:64px}
+  html{scroll-padding-top:84px}
+  .top .wrap{flex-direction:row;align-items:center;justify-content:space-between;height:72px}
+  .tabs{display:flex;padding:0;gap:8px}
+  .tabs a{padding:0 16px;font-size:14px;min-height:38px}
+  .hero{padding-block:96px}
+  .hero .wrap{grid-template-columns:1.15fr 1fr;align-items:center;gap:56px}
+  .colors .full .swatches{grid-template-columns:repeat(11,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><a class="logo" href="#top"><span class="mark"><i></i></span>새벽방음</a></div>
+    <nav class="tabs" aria-label="주요 메뉴">
+      <a href="#about">회사소개</a>
+      <a href="#cases">시공사례</a>
+      <a href="#quote">견적문의</a>
+      <a href="#measure">실측신청</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero dark">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="eyebrow">조립식 고정형 방음부스</div>
+        <h1>새벽처럼 고요한 방음<br>새벽방음입니다🌙</h1>
+        <p>우리 집 공간에 맞춰 설계하고 직접 시공하는 방음부스. 자가는 물론, 벽에 흔적을 남기기 어려운 월세·전세집까지.</p>
+        <div class="btns">
+          <a class="btn btn-main" href="#quote">견적문의</a>
+          <a class="btn btn-line" href="#measure">실측신청</a>
+        </div>
+      </div>
+      <div class="ph fader" data-photo="hero" aria-label="대표 시공 사진"><span class="ph-t">[대표 사진]<br><small>photos/hero-1.jpg</small></span></div>
+    </div>
+  </section>
+
+  <!-- 회사소개 -->
+  <section id="about">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">회사소개</div>
+        <h2>공간에 맞춰 짓는 방음부스</h2>
+        <p>새벽방음은 고정형 수준의 성능을 내면서도 집에 남는 손상을 최소화한 ‘조립식 고정형 방음부스’를 직접 제작하고 시공합니다.</p>
+      </div>
+      <div class="points">
+        <div class="pt"><h3>고정형 수준의 방음</h3><p>바닥·벽·천장을 모두 흡음재를 채운 상자 구조로 만들기에, 간편 조립식보다 확실하게 소리를 잡습니다.</p></div>
+        <div class="pt"><h3>집 손상 최소화</h3><p>벽·바닥·천장에 피스 구멍을 거의 남기지 않아 자가는 물론 월세·전세집에도 시공할 수 있어요.</p></div>
+        <div class="pt"><h3>공간 맞춤 제작</h3><p>방 크기에 맞춰 mm 단위로 설계합니다. 방 전체를 채우거나, 기존 방 안에 부스만 넣는 시공도 가능해요.</p></div>
+      </div>
+
+      <h3 class="sub-title">부스 종류</h3>
+      <div class="booths">
+        <article class="booth">
+          <div class="ph fader" data-photo="single"><span class="ph-t">[싱글부스 사진]<br><small>photos/single-1.jpg</small></span></div>
+          <div class="booth-body">
+            <h3>싱글부스</h3>
+            <p>통기타, 인터넷방송, 공부방 등에 맞는 기본형. 흡음재 60mm 1겹.</p>
+            <div class="price"><b>341만원</b><span>부터</span></div>
+          </div>
+        </article>
+        <article class="booth">
+          <div class="ph fader" data-photo="supersingle"><span class="ph-t">[슈퍼싱글부스 사진]<br><small>photos/supersingle-1.jpg</small></span></div>
+          <div class="booth-body">
+            <h3>슈퍼싱글부스</h3>
+            <p>녹음, 보컬, 악기 연습, 미디 작업까지. 가성비와 성능을 모두 갖춘 올라운드 방음부스. 흡음재 45mm 2겹(총 90mm)을 바닥·벽·천장 전체에.</p>
+            <div class="price"><b>412만원</b><span>부터</span></div>
+          </div>
+        </article>
+        <article class="booth">
+          <div class="ph fader" data-photo="double"><span class="ph-t">[더블부스 사진]<br><small>photos/double-1.jpg</small></span></div>
+          <div class="booth-body">
+            <h3>더블부스</h3>
+            <p>성악·관악기·드럼처럼 큰 소리부터, 바깥 소음 없이 집중해야 하는 믹싱·마스터링까지. 슈퍼싱글 안에 싱글부스를 한 번 더 넣고 사이에 에어갭과 문 2개를 둔 최고 성능의 이중 구조.</p>
+            <div class="price"><b>627만원</b><span>부터</span></div>          </div>
+        </article>
+      </div>
+      <div class="specs">
+        <div class="note">가격은 서울·경기, 1평 기준이에요. 지방은 출장비가 별도로 붙어요.</div>
+        <div><b>문</b>805(기본) · 705 · 605mm</div>
+        <div><b>내부 높이</b>2000 · 2200 · 2400mm 중 선택</div>
+        <div><b>옵션</b>창문(주문제작 가능),조명(방등 · 레일등 · 엣지등), 타공판, 외부 노출면 마감, 문 추가, 차음판 추가</div>
+      </div>
+
+      <h3 class="sub-title">색상 선택</h3>
+      <div class="colors">
+        <div class="swatch-group full">
+          <h4>벽·천장 마감 (아트보드)<small>11색</small></h4>
+          <div class="swatches">
+            <div class="sw"><i style="background:#E9DFCF"></i>연베이지</div>
+            <div class="sw"><i style="background:#CDB89A"></i>진베이지</div>
+            <div class="sw"><i style="background:#F8F7F3"></i>화이트</div>
+            <div class="sw"><i style="background:#CFCFCB"></i>연그레이</div>
+            <div class="sw"><i style="background:#7A7A78"></i>진그레이</div>
+            <div class="sw"><i style="background:#242424"></i>블랙</div>
+            <div class="sw"><i style="background:#CFE3B5"></i>메론</div>
+            <div class="sw"><i style="background:#F2DC8A"></i>옐로우</div>
+            <div class="sw"><i style="background:#F1C9CF"></i>핑크</div>
+            <div class="sw"><i style="background:#D6CBE6"></i>연보라</div>
+            <div class="sw"><i style="background:#BFDCEE"></i>스카이블루</div>
+          </div>
+        </div>
+        <div class="swatch-group half">
+          <h4>바닥 (라솔라 강화마루)<small>4색</small></h4>
+          <div class="swatches">
+            <div class="sw wide"><i style="background:#C89F6E"></i>멜로우오크</div>
+            <div class="sw wide"><i style="background:#A9A39A"></i>윈터그레이오크</div>
+            <div class="sw wide"><i style="background:#5A3E2E"></i>에스프레소월넛</div>
+            <div class="sw wide"><i style="background:#E6D9C2"></i>화이트파인3</div>
+          </div>
+        </div>
+        <div class="swatch-group half">
+          <h4>몰딩<small>3색</small></h4>
+          <div class="swatches">
+            <div class="sw wide"><i style="background:#F8F8F6"></i>유광백색</div>
+            <div class="sw wide"><i style="background:#B9814A"></i>메이플</div>
+            <div class="sw wide"><i style="background:#D9B98C"></i>버찌</div>
+          </div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:16px">화면 색은 실제와 다를 수 있어요. 상담 때 실물 샘플로 확인해 드립니다.</p>
+    </div>
+  </section>
+
+  <!-- 시공사례 -->
+  <section id="cases" class="tint">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">시공사례</div>
+        <h2>직접 세운 부스들</h2>
+        <p>사진을 누르면 네이버 블로그에서 시공 과정과 자세한 설명을 보실 수 있어요.</p>
+      </div>
+      <div class="cases">
+        <a class="case" href="[블로그 글 링크]" target="_blank" rel="noopener"><div class="ph fader" data-photo="case1"><span class="ph-t">[시공 사진]<br><small>photos/case1-1.jpg</small></span></div><b>[사례 제목]</b><span>[지역] · [부스 종류] · [평수]</span><em>블로그에서 자세히 보기 →</em></a>
+        <a class="case" href="[블로그 글 링크]" target="_blank" rel="noopener"><div class="ph fader" data-photo="case2"><span class="ph-t">[시공 사진]<br><small>photos/case2-1.jpg</small></span></div><b>[사례 제목]</b><span>[지역] · [부스 종류] · [평수]</span><em>블로그에서 자세히 보기 →</em></a>
+        <a class="case" href="[블로그 글 링크]" target="_blank" rel="noopener"><div class="ph fader" data-photo="case3"><span class="ph-t">[시공 사진]<br><small>photos/case3-1.jpg</small></span></div><b>[사례 제목]</b><span>[지역] · [부스 종류] · [평수]</span><em>블로그에서 자세히 보기 →</em></a>
+        <a class="case" href="[블로그 글 링크]" target="_blank" rel="noopener"><div class="ph fader" data-photo="case4"><span class="ph-t">[시공 사진]<br><small>photos/case4-1.jpg</small></span></div><b>[사례 제목]</b><span>[지역] · [부스 종류] · [평수]</span><em>블로그에서 자세히 보기 →</em></a>
+        <a class="case" href="[블로그 글 링크]" target="_blank" rel="noopener"><div class="ph fader" data-photo="case5"><span class="ph-t">[시공 사진]<br><small>photos/case5-1.jpg</small></span></div><b>[사례 제목]</b><span>[지역] · [부스 종류] · [평수]</span><em>블로그에서 자세히 보기 →</em></a>
+        <a class="case" href="[블로그 글 링크]" target="_blank" rel="noopener"><div class="ph fader" data-photo="case6"><span class="ph-t">[시공 사진]<br><small>photos/case6-1.jpg</small></span></div><b>[사례 제목]</b><span>[지역] · [부스 종류] · [평수]</span><em>블로그에서 자세히 보기 →</em></a>
+      </div>
+      <a class="blog-btn" href="[네이버 블로그 주소]" target="_blank" rel="noopener">네이버 블로그에서 시공사례 더 보기 →</a>
+    </div>
+  </section>
+
+  <!-- 견적문의 · 실측신청 -->
+  <section>
+    <div class="wrap two">
+      <div id="quote" class="box">
+        <div class="eyebrow">견적문의</div>
+        <h3>이것만 보내주시면 간단 견적 드려요</h3>
+        <ul class="checks">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>방 가로 · 세로 · 천장 높이 (또는 방 사진)</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>시공 지역</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>용도 (보컬, 악기, 방송, 게임 등)</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>원하는 부스 종류 (모르시면 추천해 드려요)</li>
+        </ul>
+        <div class="notice">
+          <b>꼭 확인해 주세요</b>
+          <p>전화나 카톡으로는 <strong>대략적인 간단 견적</strong>만 가능해요. 방마다 문·콘센트·전등·스프링클러·에어컨 위치가 달라서, <strong>공사 전에는 반드시 실측</strong>을 거쳐 최종 견적을 확정합니다.</p>
+          <a href="#measure">실측신청 보기 →</a>
+        </div>
+        <div class="row-btns">
+          <a class="rb main" href="[카카오톡 채널 링크]">카톡으로 보내기</a>
+          <a class="rb line" href="tel:01041894529">전화 문의</a>
+        </div>
+      </div>
+      <div id="simulator" class="sim-slot">
+        <div class="eyebrow">방음부스 미리보기</div>
+        <h3>우리 방에 들어갈 부스를 미리 그려보세요</h3>
+        <iframe class="sim-frame" id="sim-frame" src="simulator.html" title="방음부스 미리보기" loading="lazy"></iframe>
+        <p class="note">화면을 한 손가락으로 돌리고, 두 손가락으로 확대해 보세요. 실제 시공은 실측 후 확정돼요.</p>
+      </div>
+      <div id="measure" class="box">
+        <div class="eyebrow">실측신청</div>
+        <h3>공사 전 실측은 필수예요</h3>
+        <ol class="steps">
+          <li><div><b>실측 신청</b>카톡이나 전화로 주소와 편한 날짜를 알려주세요.</div></li>
+          <li><div><b>방문 실측</b>방 치수뿐 아니라 문, 콘센트, 전등, 스프링클러, 에어컨 위치까지 부스와 겹치지 않게 하나하나 정확히 확인해야 할 게 많아요. 그래서 직접 가서 재고 확인합니다.</div></li>
+          <li><div><b>도면 · 견적</b>공간에 맞춘 도면과 최종 견적을 드려요.</div></li>
+          <li><div><b>시공</b>일정을 잡고 직접 시공합니다.</div></li>
+        </ol>
+        <div class="notice">
+          <b>실측 비용 10만원 (서울·경기)</b>
+          <p>공사를 맡겨주시면 <strong>공사 완료 후 실측 비용 10만원을 환급</strong>해 드려요.</p>
+          <p style="font-size:12px;color:var(--ink-3)">서울·경기 외 지역은 지방 출장 비용이 추가돼요.</p>
+        </div>
+        <div class="row-btns">
+          <a class="rb main" href="[카카오톡 채널 링크]">실측 신청하기</a>
+          <a class="rb line" href="tel:01041894529">전화 신청</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="dark">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Contact</div>
+        <h2>편하게 연락 주세요</h2>
+      </div>
+      <div class="contact-grid">
+        <a class="cbtn main" href="tel:01041894529"><small>전화</small><strong>010-4189-4529</strong></a>
+        <a class="cbtn line" href="[카카오톡 채널 링크]"><small>카카오톡 채널</small><strong>새벽방음 검색</strong></a>
+        <a class="cbtn line" href="mailto:teapyung0102@naver.com"><small>이메일</small><strong style="font-size:16px;word-break:break-all">teapyung0102@naver.com</strong></a>
+      </div>
+      <div class="info">
+        <div><b>상담 시간</b>[상담 가능 시간]</div>
+        <div><b>시공 지역</b>전국 (서울·경기 외 지역 출장비 별도)</div>
+        <div><b>주소</b>[주소]</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">새벽방음</div>
+    <div>대표 [대표자명] · 사업자등록번호 [번호]</div>
+    <div>주소 [주소] · 전화 010-4189-4529</div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('message',function(e){
+  var f=document.getElementById('sim-frame');
+  if(f && e.source===f.contentWindow && e.data && e.data.sbSimH){ f.style.height=Math.ceil(e.data.sbSimH)+'px'; }
+});
+// 사진: photos 폴더에 [이름]-[번호].jpg 로 넣으면 자동으로 뜬다 (예: case1-1.jpg, case1-2.jpg)
+(function(){
+  var EXT=['jpg','jpeg','png','webp','JPG','JPEG','PNG'], MAX=10;
+  function tryLoad(base, k, done){
+    var i=0;
+    (function next(){
+      if(i>=EXT.length) return done(null);
+      var im=new Image(), src='photos/'+base+'-'+k+'.'+EXT[i++];
+      im.onload=function(){ done(src); }; im.onerror=next; im.src=src;
+    })();
+  }
+  function collect(base, cb){
+    var list=[]; (function step(k){
+      if(k>MAX) return cb(list);
+      tryLoad(base,k,function(src){ if(!src) return cb(list); list.push(src); step(k+1); });
+    })(1);
+  }
+  document.querySelectorAll('.fader[data-photo]').forEach(function(f,i){
+    collect(f.getAttribute('data-photo'), function(list){
+      if(!list.length) return;
+      f.innerHTML=''; f.classList.add('has');
+      list.forEach(function(src,n){
+        var d=document.createElement('div'); d.className='slide'+(n===0?' on':'');
+        var im=document.createElement('img'); im.src=src; im.alt=''; im.loading='lazy';
+        d.appendChild(im); f.appendChild(d);
+      });
+      if(list.length<2) return;
+      var s=f.querySelectorAll('.slide'), k=0;
+      setTimeout(function(){ setInterval(function(){
+        s[k].classList.remove('on'); k=(k+1)%s.length; s[k].classList.add('on');
+      },3000); }, i*300);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

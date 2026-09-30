@@ -10,3 +10,8 @@
 - 검사: `NODE_PATH=$(npm root -g) node .claude/check-orphans.js`
   (360~1440px 폭에서 마지막 줄이 2글자 이하인 곳을 출력. `H4. ... 4색/3색`은 작은 글씨 배지라 무시해도 됨)
 - 기본 장치: body에 `word-break:keep-all`(단어 중간에서 안 끊김), 본문에 `text-wrap:pretty`.
+
+## 사진
+- `photos/[칸이름]/` 폴더에 아무 이름으로 올리면 자동으로 뜸 (hero, single, supersingle, double, case1~6).
+- 큰 사진은 `.github/workflows/shrink-photos.yml`이 main에 올라올 때 자동으로 긴 변 1920px로 줄임.
+  사진을 직접 넣을 때도 `python3 .github/scripts/shrink_photos.py`로 줄여서 올릴 것.

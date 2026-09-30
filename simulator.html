@@ -3326,10 +3326,13 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
       if (k === 'plan' && curDims) buildPlan(curDims);
       if (k === 'quote' && curDims && typeof paintQuote === 'function') paintQuote(curDims);
     });
-    icanvas.addEventListener('click', function(ev){
+    // 드래그용 포인터 캡처 때문에 클릭은 stage로 온다 — stage에서 받고 캔버스 위인지 확인한다
+    stage.addEventListener('click', function(ev){
       if (!tapPlace || dragMoved || !curDims) return;
+      if (ev.target.closest('.reset') || ev.target.closest('.camin') || ev.target.closest('.dtg')) return;
       if (downAt && Date.now() - downAt > 600) return;      // 오래 누른 건 탭이 아니다
       var r = icanvas.getBoundingClientRect();
+      if (ev.clientX < r.left || ev.clientX > r.right || ev.clientY < r.top || ev.clientY > r.bottom) return;
       var hit = pickInside((ev.clientX - r.left)/r.width, (ev.clientY - r.top)/r.height);
       if (!hit) return;
       togglePerf(hit.face, hit.col, false);

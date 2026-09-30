@@ -2,6 +2,7 @@
 
 - `index.html`: 홈페이지, `simulator.html`: 방음부스 시뮬레이터 (index.html 안에 iframe으로 들어감)
 - 사용자에게 설명은 항상 한국어로, 쉽게.
+- simulator.html을 고치면 index.html의 iframe 주소 `simulator.html?v=...` 값도 바꿀 것 (브라우저가 예전 시뮬레이터를 기억하지 않게)
 - 수정하면 main에 바로 push (GitHub Pages로 바로 반영됨). push가 안 되면 사용자가 뭘 눌러야 하는지만 쉽게 안내.
 
 ## 줄바꿈 규칙 (항상 지킬 것)

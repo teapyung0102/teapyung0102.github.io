@@ -299,7 +299,7 @@
   .pane[data-p="door"] .doorbar:not(.winbar){display:none}
   .winbar{margin-top:0}
   .perfbar .pcount,#perf-tap,#perf-clear{display:none}
-  .perfnote{margin:0;font-size:12px;line-height:1.55;color:var(--text-secondary);background:var(--surface);border:0.5px solid var(--border);border-radius:10px;padding:.55rem .7rem}
+  .perfnote{margin:0;font-size:12px;line-height:1.55;color:var(--text-secondary);background:var(--surface);border:0.5px solid var(--border);border-radius:10px;padding:.55rem .7rem;word-break:keep-all;text-wrap:pretty}
   .perfnote b{color:var(--text-primary)}
   .page{padding-block:.8rem 1rem}
   /* 한 줄에 두 개씩 */
@@ -1214,7 +1214,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     if (reaim === false){ yawUser = true; ivw.distUser = true; }   // 화면을 직접 탭 → 시점 고정
     else { yawUser = false; }                                      // 평면도에서 바꿈 → 다시 조준
     var at = perfSlots.findIndex(function(s){ return s.face === faceKey && s.col === col; });
-    if (at >= 0) return;
+    if (at >= 0) perfSlots.splice(at, 1);             // 이미 놓인 자리를 다시 누르면 뺀다
     else {
       if (perfMax < 1){ perfMax = 1; syncCount(); }
       perfSlots.push({ face: faceKey, col: col });
@@ -1641,10 +1641,12 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     if (el && String(perfMax) !== el.value) el.value = String(perfMax);
   }
 
+  var FINE = !!(window.matchMedia && matchMedia('(hover:hover) and (pointer:fine)').matches);  // 마우스로 보는 컴퓨터
+  var TAP = FINE ? '클릭' : '터치';
   function perfLabel(){
     if (perfMax === 0) return '타공판 없이 진행';
     if (!perfSlots.length) return tapPlace
-      ? '3D에서 벽을 탭하면 그 자리에 타공판이 놓입니다 (다시 탭하면 해제)'
+      ? '3D에서 벽을 ' + TAP + '하면 그 자리에 타공판이 놓입니다 (다시 ' + TAP + '하면 빠져요)'
       : '도면 탭에서 칸을 눌러 자리를 정하세요 · 3D에서 바로 놓으려면 «탭 배치»';
     var txt = perfSlots.map(function(s){
       var L = curDims ? slotRect(curDims, s.face, s.col) : null;
@@ -2959,7 +2961,9 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
   }
 
   function hintText(){
-    return tapPlace ? '벽을 탭하면 타공판이 놓입니다 · 드래그: 돌리기'
+    if (FINE) return tapPlace ? '벽 클릭: 타공판 · 끌기: 돌리기 · 스크롤: 확대'
+                              : '끌기: 돌리기 · 스크롤: 확대';
+    return tapPlace ? '벽 터치: 타공판 · 한 손가락: 돌리기 · 두 손가락: 확대'
                     : '한 손가락: 돌리기 · 두 손가락: 확대';
   }
   var rafId = 0, wantQ = 2;
@@ -3235,6 +3239,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
       var btn = ev.target.closest('button[data-c]'); if (!btn) return;
       lightCfg.cct = btn.dataset.c; paintLightBar(); scheduleInside(false);
     });
+    document.getElementById('hint').textContent = hintText();
     document.getElementById('perf-tap').addEventListener('click', function(){
       tapPlace = !tapPlace;
       this.classList.toggle('on', tapPlace);
@@ -3985,7 +3990,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
   var en=document.getElementById('lt-enote'); if(en) en.style.display='none';
   var pb=document.querySelector('.perfbar');
   if(pb){ var p=document.createElement('p'); p.className='perfnote';
-    p.innerHTML='<b>벽의 아트보드를 누르면 그 자리가 타공판으로 바뀌어요.</b> 타공판은 2장이 기본이라, 새 자리를 누르면 먼저 놓은 타공판이 그쪽으로 옮겨가요.';
+    p.innerHTML='<b>벽의 아트보드를 누르면 그 자리가 타공판으로 바뀌어요.</b> 타공판을 다시 누르면 빠져요. 타공판은 2장이 기본이라, 2장이 다 놓인 상태에서 새 자리를 누르면 먼저 놓은 타공판이 그쪽으로 옮겨가요.';
     pb.parentNode.insertBefore(p, pb.nextSibling); }
   // 홈페이지 안에 넣었을 때 높이를 알려준다
   function tell(){ try{ parent.postMessage({ sbSimH: document.documentElement.scrollHeight }, '*'); }catch(e){} }

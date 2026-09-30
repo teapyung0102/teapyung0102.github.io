@@ -637,6 +637,9 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     nat:  { name:'주백색', g:[1.03,0.99,0.94], e:[255,246,229] },
     day:  { name:'주광색', g:[0.975,1.00,1.045], e:[247,252,255] }
   };
+  // 방등 전구색만 따로 — 레일·엣지 전구색보다 덜 누렇고 조금 밝게
+  var CCT_PANEL = { warm: { name:'전구색', g:[1.12,1.02,0.88], e:[255,237,208] } };
+  var LIGHT_AMB = 0.89, LIGHT_DIR = 0.42, LIGHT_R0 = 1100, LIGHT_RK = 0.35, LIGHT_TINT = 0.45;   // 빛 퍼짐 (환경광 · 직사광 · 퍼지는 거리 · 빛색 세기)
   var PANEL_MM = 500, PANEL_T = 38, RAIL_W = 34;
   var RAIL_OFF = 285;        // 벽에서 띄우는 거리
   var RAIL_GAP = 20;         // ㅁ자에서 마지막 모서리를 띄우는 간격
@@ -2323,10 +2326,17 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     });
     var GY1 = d.ih;
     var HAS_FIX = (NB > 0) || !!PN || NE > 0;
-    var tone = CCT[lightCfg.cct] || CCT.day;
-    var gR = tone.g[0], gG = tone.g[1], gB = tone.g[2];
-    var eR = tone.e[0], eG = tone.e[1], eB = tone.e[2];
-    var AMB = NL ? 0.78 : 0.50, DIR = NL ? 0.66 : 0;
+    // 방등은 제 빛색, 레일·엣지는 기본 빛색 — 벽·바닥은 켜진 조명 색을 섞어 받는다
+    var tP = CCT_PANEL[lightCfg.cct] || CCT[lightCfg.cct] || CCT.day, tRl = CCT[lightCfg.cct] || CCT.day, tEd = tRl;
+    var wP = PN ? 1 : 0, wRl = NB > 0 ? 0.7 : 0, wEd = NE > 0 ? Math.min(0.6, 0.12*NE) : 0, wS = wP + wRl + wEd;
+    if (!wS){ wP = 1; wS = 1; }
+    var gR = (tP.g[0]*wP + tRl.g[0]*wRl + tEd.g[0]*wEd)/wS,
+        gG = (tP.g[1]*wP + tRl.g[1]*wRl + tEd.g[1]*wEd)/wS,
+        gB = (tP.g[2]*wP + tRl.g[2]*wRl + tEd.g[2]*wEd)/wS;
+    var eR = tP.e[0], eG = tP.e[1], eB = tP.e[2];              // 방등 발광면
+    var rR = tRl.e[0], rG = tRl.e[1], rB = tRl.e[2];           // 레일 스팟 LED
+    // 빛은 기구 가까이서 밝고 멀어질수록 빠르게 줄어든다
+    var AMB = NL ? LIGHT_AMB : 0.50, DIR = NL ? LIGHT_DIR : 0;
     var blackRail = (lightCfg.railColor === 'b');
     // 흰 레일은 순백으로 두면 방 안에서 붕 뜬다 — 살짝 어둡게 + 방 색온도를 조금 받게
     var wkR = 0.8 + 0.2*gR, wkG = 0.8 + 0.2*gG, wkB = 0.8 + 0.2*gB;
@@ -2334,7 +2344,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     var slotK = blackRail ? 0.52 : 0.62;
     var APR2 = blackRail ? 0.42 : 0.58;                  // 블랙은 조사경이 좁다 (54 vs 64)
     var reflR = blackRail ? 176 : 234, reflG = blackRail ? 178 : 233, reflB = blackRail ? 182 : 230;
-    var LR = Math.max(1500, (d.iw + d.id)*0.55), INVR2 = 1/(LR*LR);
+    var LR = Math.max(LIGHT_R0, (d.iw + d.id)*LIGHT_RK), INVR2 = 1/(LR*LR);
     var SPOT = 420, RIM = 24;
     var BIG = 1e9, o = 0;
     var hw = W/2, hh = H/2, vgR = 1/(hw*hw);
@@ -2923,22 +2933,26 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
         if (tv < e) e = tv; if (th - tv < e) e = th - tv;
         var ao = e < 210 ? 0.87 + 0.13*(e/210) : 1;
         var nx2 = (i2 - hw)*(i2 - hw) + dyv;
-        var f = (AMB + DIR*acc + (ny3 < 0 ? 0.17 : 0))
+        var dirL = DIR*acc;
+        var f = (AMB + dirL + (ny3 < 0 ? 0.17 : 0))
                 * ao * panelShade * (1 - 0.07*Math.min(1, nx2*vgR));
+        // 빛 색은 기구 빛이 닿는 만큼만 진하게 — 먼 구석은 색이 옅다
+        var tmx = LIGHT_TINT*(0.35 + 1.3*dirL/(AMB + dirL + 1e-6)); if (tmx > LIGHT_TINT) tmx = LIGHT_TINT;
+        var tR = 1 + (gR - 1)*tmx, tG = 1 + (gG - 1)*tmx, tB = 1 + (gB - 1)*tmx;
         if (lit){
           var cr, cg, cb;
           if (lit === 1){ cr = eR; cg = eG; cb = eB; }                       // 방등 확산판
           else if (lit === 2){ cr = 236; cg = 237; cb = 239; }               // 방등 테두리
           else if (lit === 3){ cr = 214*f; cg = 213*f; cb = 209*f; }         // 흰 레일 바
           else if (lit === 5){ cr = 220*f; cg = 219*f; cb = 215*f; }         // 스팟 몸통(화이트)
-          else { cr = eR; cg = eG; cb = eB; }                                // 스팟 조사면
+          else { cr = rR; cg = rG; cb = rB; }                                // 스팟 조사면
           out[o] = cr > 255 ? 255 : cr; out[o+1] = cg > 255 ? 255 : cg;
           out[o+2] = cb > 255 ? 255 : cb; out[o+3] = 255; o += 4; continue;
         }
 
-        var r  = (td[i00]*w00   + td[i10]*w10   + td[i01]*w01   + td[i11]*w11)*f*gR;
-        var g2 = (td[i00+1]*w00 + td[i10+1]*w10 + td[i01+1]*w01 + td[i11+1]*w11)*f*gG;
-        var b2 = (td[i00+2]*w00 + td[i10+2]*w10 + td[i01+2]*w01 + td[i11+2]*w11)*f*gB;
+        var r  = (td[i00]*w00   + td[i10]*w10   + td[i01]*w01   + td[i11]*w11)*f*tR;
+        var g2 = (td[i00+1]*w00 + td[i10+1]*w10 + td[i01+1]*w01 + td[i11+1]*w11)*f*tG;
+        var b2 = (td[i00+2]*w00 + td[i10+2]*w10 + td[i01+2]*w01 + td[i11+2]*w11)*f*tB;
         if (tex.felt){
           var fmk = (td[i00+3]*w00 + td[i10+3]*w10 + td[i01+3]*w01 + td[i11+3]*w11)*(1/255);
           if (fmk > 0.02){

@@ -67,7 +67,7 @@ section{padding-block:56px}
 .btn-main{background:var(--dawn);color:var(--night)}
 .btn-line{border:1.5px solid var(--night-line);color:var(--night-text);font-weight:600}
 .ph{background:var(--ph);color:var(--ph-text);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:14px;max-width:100%}
-.hero .ph{background:var(--night-2);color:var(--night-mute);border:1.5px dashed var(--night-line);aspect-ratio:16/9}
+.hero .ph{background:var(--night-2);color:var(--night-mute);border:1.5px dashed var(--night-line);aspect-ratio:3/2}
 
 /* 사진 페이드 전환 */
 .fader{position:relative;overflow:hidden}
@@ -425,6 +425,11 @@ window.addEventListener('message',function(e){
     list.forEach(function(src,n){
       var d=document.createElement('div'); d.className='slide'+(n===0?' on':'');
       var im=document.createElement('img'); im.src=src; im.alt=''; im.loading=(n===0?'eager':'lazy');
+      // 대표 사진 칸은 첫 사진 비율에 맞춰 양옆(또는 위아래)이 15%만 잘리게 한다
+      if(n===0 && f.getAttribute('data-photo')==='hero') im.onload=function(){
+        var r=im.naturalWidth/im.naturalHeight; if(!r) return;
+        f.style.aspectRatio=String(r>1 ? r*0.85 : r/0.85);
+      };
       d.appendChild(im); f.appendChild(d);
     });
     if(list.length<2) return;

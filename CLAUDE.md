@@ -16,3 +16,4 @@
 - `photos/[칸이름]/` 폴더에 아무 이름으로 올리면 자동으로 뜸 (hero, single, supersingle, double, case1~6).
 - 큰 사진은 `.github/workflows/shrink-photos.yml`이 main에 올라올 때 자동으로 긴 변 1920px로 줄임.
   사진을 직접 넣을 때도 `python3 .github/scripts/shrink_photos.py`로 줄여서 올릴 것.
+- 사진이 기울어 보이면 `python3 .github/scripts/straighten_photos.py photos/폴더/*.jpg` (세로선 기준으로 바로 세우고 빈 모서리만 자름, 색 보정 없음). 위에서 내려다본 사진처럼 세로선이 없는 사진은 결과를 눈으로 확인할 것.

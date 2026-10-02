@@ -3,7 +3,7 @@ import glob, os
 from PIL import Image, ImageOps
 
 MAX = 1920
-LIMIT = 600 * 1024  # 600KB 넘으면 다시 저장
+LIMIT = 1500 * 1024  # 크기가 1920 이하인데도 1.5MB 넘으면 다시 저장 (이미 줄인 사진을 거듭 압축하지 않게)
 
 for f in glob.glob('photos/**/*', recursive=True):
     ext = os.path.splitext(f)[1].lower()

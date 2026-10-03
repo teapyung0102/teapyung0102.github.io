@@ -13,7 +13,7 @@
 - 기본 장치: body에 `word-break:keep-all`(단어 중간에서 안 끊김), 본문에 `text-wrap:pretty`.
 
 ## 사진
-- `photos/[칸이름]/` 폴더에 아무 이름으로 올리면 자동으로 뜸 (hero, single, supersingle, double, case1~6).
+- `photos/[칸이름]/` 폴더에 아무 이름으로 올리면 자동으로 뜸 (hero, case1~6). 부스 카드(single·supersingle·double)는 사진 칸을 뺐음 — 폴더 사진은 화면에 안 나옴.
 - 큰 사진은 `.github/workflows/shrink-photos.yml`이 main에 올라올 때 자동으로 긴 변 1920px로 줄임.
   사진을 직접 넣을 때도 `python3 .github/scripts/shrink_photos.py`로 줄여서 올릴 것.
 - 사진이 기울거나 벽이 휘청여 보이면 `pip install opencv-python-headless && python3 .github/scripts/straighten_photos.py photos/폴더/*.jpg` (세로선이 모두 평행하게 원근을 맞추고 빈 테두리만 자름, 색 보정 없음). 렌즈 휨 펴기는 폰이 이미 해 둬서 하면 오히려 휨 — 하지 말 것. 결과는 눈으로 확인할 것.

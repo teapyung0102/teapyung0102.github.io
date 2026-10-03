@@ -132,6 +132,7 @@ section{padding-block:56px}
 .notice a{color:var(--dawn-ink);font-weight:600;font-size:14px}
 .sim-slot{order:2;padding:24px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:14px}
 .sim-slot h3{font-size:18px}
+#about .sim-slot{margin-top:40px}
 .sim-frame{display:block;width:100%;height:1100px;border:0;border-radius:12px;background:#F3F4F3}
 .sim-area{min-height:280px;border:1.5px dashed #BDB3A2;border-radius:12px;background:var(--ground);display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--ph-text);font-size:14px}
 #quote{order:1}
@@ -160,7 +161,6 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
   section{padding-block:88px}
   .points,.booths{grid-template-columns:repeat(3,minmax(0,1fr))}
   .two{grid-template-columns:1fr 1fr}
-  .sim-slot{grid-column:1/-1;order:3}
   #measure{order:2}
   .sim-area{min-height:360px}
   .cases{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 20px}
@@ -261,6 +261,18 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         <div><b>옵션</b>창문(주문제작 가능),조명(방등 · 레일등 · 엣지등), 타공판, 외부 노출면 마감, 문 추가, 차음판 추가</div>
       </div>
 
+      <div id="simulator" class="sim-slot">
+        <div class="eyebrow">방음부스 미리보기</div>
+        <h3>우리 방에 들어갈 부스를 미리 그려보세요</h3>
+        <p class="note">가장 많이 쓰는 마감재만 고를 수 있어요. 더 자세한 설정은 실측 때 함께 정해요.</p>
+        <iframe class="sim-frame" id="sim-frame" src="simulator.html?v=20260930-4" title="방음부스 미리보기" loading="lazy"></iframe>
+        <div class="note sim-help">
+          <p><b>모바일 :</b> 한 손가락으로 끌어서 돌리고, 두 손가락으로 벌려서 확대해요. 벽을 터치하면 타공판을 놓거나 뺄 수 있어요.</p>
+          <p><b>데스크탑 :</b> 마우스로 끌어서 돌리고, 스크롤로 확대해요. 벽을 클릭하면 타공판을 놓거나 뺄 수 있어요.</p>
+          <p>실제 시공은 실측 후 확정돼요.</p>
+        </div>
+      </div>
+
       <h3 class="sub-title">색상 선택</h3>
       <div class="colors">
         <div class="swatch-group full">
@@ -341,17 +353,6 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         <div class="row-btns">
           <a class="rb main" href="[카카오톡 채널 링크]">카톡으로 보내기</a>
           <a class="rb line" href="tel:01041894529">전화 문의</a>
-        </div>
-      </div>
-      <div id="simulator" class="sim-slot">
-        <div class="eyebrow">방음부스 미리보기</div>
-        <h3>우리 방에 들어갈 부스를 미리 그려보세요</h3>
-        <p class="note">가장 많이 쓰는 마감재만 고를 수 있어요. 더 자세한 설정은 실측 때 함께 정해요.</p>
-        <iframe class="sim-frame" id="sim-frame" src="simulator.html?v=20260930-4" title="방음부스 미리보기" loading="lazy"></iframe>
-        <div class="note sim-help">
-          <p><b>모바일 :</b> 한 손가락으로 끌어서 돌리고, 두 손가락으로 벌려서 확대해요. 벽을 터치하면 타공판을 놓거나 뺄 수 있어요.</p>
-          <p><b>데스크탑 :</b> 마우스로 끌어서 돌리고, 스크롤로 확대해요. 벽을 클릭하면 타공판을 놓거나 뺄 수 있어요.</p>
-          <p>실제 시공은 실측 후 확정돼요.</p>
         </div>
       </div>
       <div id="measure" class="box">

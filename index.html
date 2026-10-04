@@ -84,6 +84,24 @@ section{padding-block:56px}
 .pt{padding:24px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:8px}
 .pt h3{font-size:18px}
 .pt p{font-size:15px;color:var(--ink-2)}
+.faq{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:20px 24px;font-size:17px;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .q{flex:none;width:28px;height:28px;border-radius:50%;background:var(--dawn);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px}
+.faq summary::after{content:'+';margin-left:auto;font-size:22px;font-weight:400;color:var(--ink-3)}
+.faq[open] summary::after{content:'−'}
+.faq-a{padding:0 24px 24px;display:flex;flex-direction:column;gap:16px;color:var(--ink-2);font-size:15px;line-height:1.75}
+.faq-a strong{color:var(--ink)}
+.kinds{display:grid;gap:10px}
+.kind{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--ground)}
+.kind b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+.kind ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px;font-size:14px}
+.kind li{padding-left:.75em;text-indent:-.75em}
+.kind li::before{content:'· ';color:var(--ink-3)}
+.kind.ours{background:#FBF1E8;border-color:#EFCFB4}
+.kind.ours b{color:var(--dawn-ink)}
+.faq-sum{padding:14px 16px;border-left:3px solid var(--dawn);background:var(--ground);border-radius:0 10px 10px 0;color:var(--ink);font-weight:600}
+@media (min-width:720px){.kinds{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .booths{display:grid;gap:16px}
 .booth{background:var(--card);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
 .booth-body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
@@ -228,6 +246,28 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         <div class="pt"><h3>집 손상 최소화</h3><p>벽·바닥·천장에 피스 구멍을 거의 남기지 않아 자가는 물론 월세·전세집에도 시공할 수 있어요.</p></div>
         <div class="pt"><h3>공간 맞춤 제작</h3><p>방 크기에 맞춰 mm 단위로 설계합니다. 방 전체를 채우거나, 기존 방 안에 부스만 넣는 시공도 가능해요.</p></div>
       </div>
+
+      <details class="faq" open>
+        <summary><span class="q">Q</span>조립식 고정형 방음부스가 무엇인가요?</summary>
+        <div class="faq-a">
+          <p>이름이 조금 낯설죠. 쉽게 말하면 <strong>방 안에 우리 방 크기에 꼭 맞는 ‘방 속의 방’을 하나 더 짓는 것</strong>이에요. 집에 방음을 하는 방법은 보통 두 가지인데, 새벽방음은 그 둘의 좋은 점만 모았어요.</p>
+          <div class="kinds">
+            <div class="kind">
+              <b>간편 조립식 부스</b>
+              <ul><li>정해진 크기의 완제품을 조립</li><li>설치가 빠르고 편해요</li><li>이음새로 소리가 새기 쉽고 방에 꼭 맞지 않아요</li></ul>
+            </div>
+            <div class="kind">
+              <b>고정형 방음 공사</b>
+              <ul><li>방의 벽·바닥·천장을 직접 뜯고 공사</li><li>방음 성능이 확실해요</li><li>공사가 크고 집에 손상이 남아 월세·전세집은 어려워요</li></ul>
+            </div>
+            <div class="kind ours">
+              <b>새벽방음 조립식 고정형</b>
+              <ul><li>방 치수에 맞춰 mm 단위로 설계해 현장에서 조립</li><li>바닥·벽·천장을 빈틈없는 상자로 막아 고정형 수준의 방음</li><li>기존 벽에 피스 구멍을 거의 남기지 않아요</li></ul>
+            </div>
+          </div>
+          <p class="faq-sum">조립식처럼 집을 다치게 하지 않고, 고정형처럼 확실하게 막는 맞춤 방음부스예요.</p>
+        </div>
+      </details>
 
     </div>
   </section>

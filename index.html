@@ -177,7 +177,21 @@ section{padding-block:56px}
 a.case:hover b{text-decoration:underline}
 .case em.soon{color:var(--ink-3);font-weight:400}
 .blog-btn{margin-top:28px;display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:10px;background:var(--night);color:var(--night-text);font-weight:700;font-size:15px}
-@media (min-width:720px){.blog-btn{display:inline-flex}}
+/* 시공 영상: 처음엔 썸네일만, 누르면 그 자리에서 유튜브 재생 */
+.vids{display:grid;gap:24px}
+.vid{display:flex;flex-direction:column;gap:6px}
+.vid b{font-size:16px;margin-top:4px}
+.vid span{font-size:13px;color:var(--ink-3)}
+.yt{position:relative;display:block;width:100%;aspect-ratio:16/9;padding:0;border:0;border-radius:14px;overflow:hidden;background:#111;cursor:pointer}
+.yt img{width:100%;height:100%;object-fit:cover;display:block}
+.yt .play{position:absolute;left:50%;top:50%;width:68px;height:48px;transform:translate(-50%,-50%)}
+.yt:hover .play path:first-child,.yt:focus-visible .play path:first-child{fill:#FF0000;fill-opacity:1}
+.yt:focus-visible{outline:3px solid var(--dawn);outline-offset:3px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.case-links{margin-top:28px;display:grid;gap:10px}
+.case-links .blog-btn{margin-top:0}
+.blog-btn.yt-btn{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+@media (min-width:720px){.blog-btn{display:inline-flex}.vids{grid-template-columns:repeat(2,minmax(0,1fr))}.case-links{display:flex;flex-wrap:wrap}}
 
 /* 견적문의 · 실측신청 */
 .two{display:grid;gap:16px}
@@ -456,7 +470,24 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         <div class="case"><div class="ph fader" data-photo="case3"><span class="ph-t">[시공 사진]<br><small>photos/case3 폴더</small></span></div><b>게임·취미생활용 방음부스 제천 아파트</b><span>충북 제천 · 슈퍼싱글부스 · 1.5평 · 높이 2000</span></div>
         <!-- TODO: 제천 사례 블로그 글을 쓰면 위 div를 다른 사례처럼 <a class="case" href="블로그주소" target="_blank" rel="noopener">로 바꾸고 <em>블로그에서 자세히 보기 →</em> 추가 -->
       </div>
-      <a class="blog-btn" href="https://blog.naver.com/saebyeok0711" target="_blank" rel="noopener">네이버 블로그에서 시공사례 더 보기 →</a>
+
+      <h3 class="sub-title">영상으로 보기</h3>
+      <div class="vids">
+        <div class="vid">
+          <button type="button" class="yt" data-yt="8EpWcbiMAfY" aria-label="동탄 지식산업센터 방음부스 시공과정 영상 재생"><img src="https://i.ytimg.com/vi/8EpWcbiMAfY/hqdefault.jpg" alt="" loading="lazy"><svg class="play" viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#212121" fill-opacity=".85"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></button>
+          <b>방송용 방음부스 동탄 지식산업센터</b>
+          <span>시공 과정 3분 요약 · 슈퍼싱글부스 · 높이 2200</span>
+        </div>
+        <div class="vid">
+          <button type="button" class="yt" data-yt="7Q1rDtQm7pU" aria-label="인천 아파트 일렉기타 입시용 방음부스 시공과정 영상 재생"><img src="https://i.ytimg.com/vi/7Q1rDtQm7pU/hqdefault.jpg" alt="" loading="lazy"><svg class="play" viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#212121" fill-opacity=".85"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></button>
+          <b>일렉기타 입시용 방음부스 인천 아파트</b>
+          <span>시공 과정 · 슈퍼싱글부스 · 1.7평 · 높이 2000</span>
+        </div>
+      </div>
+      <div class="case-links">
+        <a class="blog-btn" href="https://blog.naver.com/saebyeok0711" target="_blank" rel="noopener">네이버 블로그에서 시공사례 더 보기 →</a>
+        <a class="blog-btn yt-btn" href="https://www.youtube.com/@saebyeok0711" target="_blank" rel="noopener">유튜브 채널에서 영상 더 보기 →</a>
+      </div>
     </div>
   </section>
 
@@ -607,6 +638,17 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
 </nav>
 
 <script>
+// 시공 영상: 누르면 썸네일 자리에 유튜브 플레이어를 넣는다 (처음부터 넣으면 페이지가 무거워짐)
+document.querySelectorAll('.yt[data-yt]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-yt')+'?autoplay=1&rel=0&playsinline=1';
+    f.title=b.getAttribute('aria-label').replace(/ 재생$/,'');
+    f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen=true;
+    f.referrerPolicy='strict-origin-when-cross-origin';   // 유튜브는 어느 사이트에서 틀었는지 알아야 재생됨
+    var box=document.createElement('div'); box.className='yt'; box.appendChild(f); b.replaceWith(box);
+  });
+});
 window.addEventListener('message',function(e){
   var f=document.getElementById('sim-frame');
   if(f && e.source===f.contentWindow && e.data && e.data.sbSimH){ f.style.height=Math.ceil(e.data.sbSimH)+'px'; }

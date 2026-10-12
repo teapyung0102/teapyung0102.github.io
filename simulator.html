@@ -317,20 +317,21 @@
   .winbar .dsnap > span:first-child{display:none}
   .setup .setup-body{gap:.6rem;padding-top:.6rem}
 /* 카톡 상담 */
-.ask{margin-top:14px;background:var(--surface);border:0.5px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.ask{word-break:keep-all;margin-top:14px;background:var(--surface);border:0.5px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
 .ask-head{display:flex;flex-direction:column;gap:2px}
 .ask-head b{font-size:15px;color:var(--text-primary)}
 .ask-spec span{white-space:nowrap}
 .ask-spec{font-size:12.5px;color:var(--text-secondary);font-variant-numeric:tabular-nums;word-break:keep-all}
 .ask-price{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding-top:8px;border-top:0.5px solid var(--border)}
-.ask-price span{font-size:13px;color:var(--text-secondary)}
+.ask-price span{white-space:nowrap;font-size:13px;color:var(--text-secondary)}
 .ask-price b{font-size:20px;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.ask-price b.small{font-size:13px;white-space:nowrap}
 .ask-note{margin:0;font-size:11.5px;line-height:1.55;color:var(--text-secondary);word-break:keep-all;text-wrap:pretty}
 .ask-go{font:inherit;font-size:15px;font-weight:700;min-height:48px;border:0;border-radius:10px;background:#FEE500;color:#191919;cursor:pointer}
 .ask-go:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
 .ask-msg{margin:0;font-size:12.5px;line-height:1.5;color:var(--text-primary);word-break:keep-all}
 .ask-msg:empty{display:none}
-.ask-txt{font:inherit;font-size:12.5px;line-height:1.5;width:100%;min-height:200px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:8px;background:var(--bg);color:var(--text-primary);resize:vertical;box-sizing:border-box}
+.ask-txt{font:inherit;font-size:12.5px;line-height:1.5;width:100%;min-height:200px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:8px;background:var(--bg);color:var(--text-primary);resize:vertical;box-sizing:border-box;word-break:keep-all;overflow-wrap:break-word}
 </style>
 
 <div class="page">
@@ -3706,6 +3707,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     return Math.round(v * 1.1);                                           // 부가세 포함
   }
   function askManwon(n){ return '약 ' + Math.round(n / 10000).toLocaleString('ko-KR') + '만원'; }
+  function askAmtText(d){ return pyOf(d) > 4 ? '4평 넘으면 상담 때 안내' : askManwon(askPrice(d)); }
   function askText(d){
     var py = pyOf(d), L = [];
     L.push('[새벽방음 시뮬레이터로 상담 문의]');
@@ -3723,7 +3725,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     if (lightCfg.room) lt.push('방등');
     if (lightCfg.rail !== 'none') lt.push('레일등 ' + (RAIL_KO[lightCfg.rail] || ''));
     L.push('· 조명: ' + (lt.length ? lt.join(' + ') + ' · ' + (CCT_KO[lightCfg.cct] || '') : '없음'));
-    L.push('· 예상 부스 가격: ' + askManwon(askPrice(d)) + ' (부가세 포함, 옵션 별도)');
+    L.push('· 예상 부스 가격: ' + (pyOf(d) > 4 ? '4평이 넘어 상담 필요' : askManwon(askPrice(d)) + ' (부가세 포함, 옵션 별도)'));
     L.push('');
     L.push('· 시공 지역: ');
     L.push('· 용도(보컬·악기·방송 등): ');
@@ -3734,7 +3736,8 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     var sp = document.getElementById('ask-spec'); if (!sp) return;
     sp.innerHTML = [d.b.name, '바깥 ' + fmt(d.W) + '×' + fmt(d.D), '안쪽 높이 ' + fmt(d.ih), pyOf(d).toFixed(1) + '평']
       .map(function(t){ return '<span>' + t + '</span>'; }).join(' · ');
-    document.getElementById('ask-amt').textContent = askManwon(askPrice(d));
+    var am = document.getElementById('ask-amt'), big = pyOf(d) > 4;
+    am.textContent = askAmtText(d); am.classList.toggle('small', big);
     var ta = document.getElementById('ask-txt'); if (!ta.hidden) ta.value = askText(d);
   }
   (function(){

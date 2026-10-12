@@ -3690,7 +3690,9 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     document.getElementById('win-list').hidden = !wins.length;
     document.getElementById('win-del').hidden = !wn;
     var note = document.getElementById('win-note');
-    if (!wn){ note.textContent = '미닫이창 없음 · 기본 가로 1200 × 세로 800, 내경 바닥에서 1,000 위에 달고 위는 창위판'; return; }
+    var WIN_NOTE = '가로 1200 × 세로 800 미닫이창';             // 고객용 안내는 이 한 줄만
+    note.textContent = WIN_NOTE;
+    if (!wn) return;
     Array.prototype.forEach.call(document.querySelectorAll('#win-face button'), function(b){
       b.classList.toggle('on', b.dataset.f === wn.face);
     });
@@ -3725,7 +3727,6 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
       t += (gapW <= CLEAR + 0.5) ? ' · 기존 방 벽에 붙어 있어 방 창문도 같은 자리에 생겨요'
                                  : ' · 기존 방 벽과 ' + fmt(Math.round(gapW)) + 'mm 떨어져 있어 방 창문은 안 생겨요';
     }
-    note.textContent = t;
     if (wn.pos !== null) wn.pos = q.p;
   }
   function paintDoorBar(d){

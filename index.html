@@ -493,10 +493,21 @@ window.addEventListener('message',function(e){
       d.appendChild(im); f.appendChild(d);
     });
     if(list.length<2) return;
-    var s=f.querySelectorAll('.slide'), k=0;
-    setTimeout(function(){ setInterval(function(){
-      s[k].classList.remove('on'); k=(k+1)%s.length; s[k].classList.add('on');
-    },3000); }, i*300);
+    if(f.closest('.cases')){ caseQ.push(f); startCases(); }   // 시공사례는 한 칸씩 차례로
+    else setInterval(function(){ next(f); }, 4000);
+  }
+  function next(f){
+    var s=f.querySelectorAll('.slide'), k=+(f.dataset.k||0);
+    s[k].classList.remove('on'); k=(k+1)%s.length; s[k].classList.add('on'); f.dataset.k=k;
+  }
+  // 시공사례: 세 칸이 동시에 바뀌면 산만하니, 2.5초마다 한 칸씩만 돌아가며 바꾼다
+  var caseQ=[], caseT=null, turn=0;
+  function startCases(){
+    if(caseT) return;
+    caseT=setInterval(function(){
+      if(!caseQ.length) return;
+      next(caseQ[turn%caseQ.length]); turn++;
+    },2500);
   }
   function fromTree(paths){
     var map={};

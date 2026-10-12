@@ -500,13 +500,28 @@ window.addEventListener('message',function(e){
     var s=f.querySelectorAll('.slide'), k=+(f.dataset.k||0);
     s[k].classList.remove('on'); k=(k+1)%s.length; s[k].classList.add('on'); f.dataset.k=k;
   }
-  // 시공사례: 세 칸이 동시에 바뀌면 산만하니, 2.5초마다 한 칸씩만 돌아가며 바꾼다
-  var caseQ=[], caseT=null, turn=0;
+  // 시공사례: 세 칸이 동시에 바뀌면 산만하니, 2.5초마다 한 칸씩만 바꾼다.
+  // PC(세 칸)에서는 보이는 칸끼리 차례로, 폰(한 줄)에서는 화면 가운데 칸만 바뀐다.
+  var caseQ=[], caseT=null, turn=0, seen=new Set(), io=null;
   function startCases(){
+    if(!io && 'IntersectionObserver' in window){
+      io=new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.intersectionRatio>=0.5) seen.add(e.target); else seen.delete(e.target); });
+      },{threshold:[0,0.5,1]});
+    }
+    var f=caseQ[caseQ.length-1]; if(io) io.observe(f); else seen.add(f);
     if(caseT) return;
     caseT=setInterval(function(){
-      if(!caseQ.length) return;
-      next(caseQ[turn%caseQ.length]); turn++;
+      var vis=caseQ.filter(function(x){ return seen.has(x); });
+      if(!vis.length) return;
+      if(matchMedia('(min-width:720px)').matches){ next(vis[turn%vis.length]); turn++; return; }
+      // 폰(한 줄): 화면 가운데에 가장 가까운 칸만 바꾼다
+      var mid=innerHeight/2;
+      vis.sort(function(a,b){
+        var ra=a.getBoundingClientRect(), rb=b.getBoundingClientRect();
+        return Math.abs(ra.top+ra.height/2-mid)-Math.abs(rb.top+rb.height/2-mid);
+      });
+      next(vis[0]);
     },2500);
   }
   function fromTree(paths){

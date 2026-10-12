@@ -188,6 +188,18 @@ a.case:hover b{text-decoration:underline}
 .yt:hover .play path:first-child,.yt:focus-visible .play path:first-child{fill:#FF0000;fill-opacity:1}
 .yt:focus-visible{outline:3px solid var(--dawn);outline-offset:3px}
 .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vlabel{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px}
+.vlabel b{font-size:16px}
+.vlabel span{font-size:14px;color:var(--ink-3)}
+.vlabel.second{margin-top:36px}
+/* 쇼츠: 세로 영상 3개를 한 줄로, 누르면 유튜브(폰은 앱)에서 바로 넘겨 보기 */
+.shorts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:660px}
+.short{display:flex;flex-direction:column;gap:6px}
+.short .sh{position:relative;display:block;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:#111}
+.short .sh img{width:100%;height:100%;object-fit:cover;display:block}
+.short .sh .play{position:absolute;left:50%;top:50%;width:44px;height:31px;transform:translate(-50%,-50%)}
+.short:hover .play path:first-child,.short:focus-visible .play path:first-child{fill:#FF0000;fill-opacity:1}
+.short b{font-size:13px;line-height:1.45}
 .case-links{margin-top:28px;display:grid;gap:10px}
 .case-links .blog-btn{margin-top:0}
 .blog-btn.yt-btn{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
@@ -472,6 +484,13 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
       </div>
 
       <h3 class="sub-title">영상으로 보기</h3>
+      <p class="vlabel"><b>쇼츠</b><span>핵심만 짧게, 가볍게 넘겨 보세요</span></p>
+      <div class="shorts">
+        <a class="short" href="https://www.youtube.com/shorts/YukQr7zgTWw" target="_blank" rel="noopener" aria-label="쇼츠: 방송용 부스 · 동탄 (유튜브에서 열림)"><span class="sh"><img src="https://i.ytimg.com/vi/YukQr7zgTWw/oardefault.jpg" alt="" loading="lazy"><svg class="play" viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#212121" fill-opacity=".85"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></span><b>방송용 부스 · 동탄</b></a>
+        <a class="short" href="https://www.youtube.com/shorts/9OfV2sqJ2bA" target="_blank" rel="noopener" aria-label="쇼츠: 방음부스 이전 (유튜브에서 열림)"><span class="sh"><img src="https://i.ytimg.com/vi/9OfV2sqJ2bA/oardefault.jpg" alt="" loading="lazy"><svg class="play" viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#212121" fill-opacity=".85"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></span><b>방음부스 이전</b></a>
+        <a class="short" href="https://www.youtube.com/shorts/N6w5ZxXYn8c" target="_blank" rel="noopener" aria-label="쇼츠: 구멍 뚫린 방음부스 (유튜브에서 열림)"><span class="sh"><img src="https://i.ytimg.com/vi/N6w5ZxXYn8c/oardefault.jpg" alt="" loading="lazy"><svg class="play" viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#212121" fill-opacity=".85"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></span><b>구멍 뚫린 방음부스</b></a>
+      </div>
+      <p class="vlabel second"><b>시공 과정</b><span>현장 하나를 처음부터 끝까지, 3분 안팎으로</span></p>
       <div class="vids">
         <div class="vid">
           <button type="button" class="yt" data-yt="8EpWcbiMAfY" aria-label="동탄 지식산업센터 방음부스 시공과정 영상 재생"><img src="https://i.ytimg.com/vi/8EpWcbiMAfY/hqdefault.jpg" alt="" loading="lazy"><svg class="play" viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#212121" fill-opacity=".85"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></button>

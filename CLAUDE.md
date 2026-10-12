@@ -22,3 +22,4 @@
 - 도메인: https://saebyeok0711.co.kr (CNAME 파일). `robots.txt`, `sitemap.xml` 있음 — 내용을 크게 바꾸면 sitemap의 lastmod 날짜도 갱신.
 - 네이버 서치어드바이저·구글 서치콘솔 소유 확인 코드(meta 태그)는 index.html `<head>`의 "검색엔진 소유 확인" 주석 아래에 넣는다.
 - simulator.html은 iframe 전용이라 `noindex`.
+- 카톡·문자 링크 공유 미리보기 그림은 `og.jpg`(1200×630, 첫 화면 디자인). 원본은 `.github/og/og.html` — 첫 화면 문구를 바꾸면 이 파일도 고쳐서 크롬으로 1200×630 캡처해 og.jpg를 다시 만들 것.

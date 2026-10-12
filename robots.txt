@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /CLAUDE
+Disallow: /README
+
+Sitemap: https://saebyeok0711.co.kr/sitemap.xml

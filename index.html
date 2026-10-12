@@ -152,9 +152,9 @@ section{padding-block:56px}
 .diff-more a{color:var(--dawn);font-weight:600}
 @media (min-width:720px){.diffs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:1000px){.diffs{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.faq-label{margin-top:36px;font-size:15px;font-weight:700;color:var(--ink-2)}
-.faq-label + .faq{margin-top:12px}
 .faq + .faq{margin-top:10px}
+.faqs{margin-bottom:40px}
+.faqs .faq:first-child{margin-top:0}
 .specs{margin-top:16px;display:grid;gap:4px;font-size:14px;color:var(--ink-2)}
 .specs b{color:var(--ink);font-weight:600;margin-right:6px}
 .swatch-group{display:flex;flex-direction:column;gap:12px}
@@ -352,44 +352,6 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         </div>
       </details>
 
-      <!-- 자주 묻는 질문: 2026년 10월 경쟁사·커뮤니티 조사에서 손님들이 가장 많이 걱정한 것 (.claude/research 참고) -->
-      <p class="faq-label">자주 묻는 질문</p>
-      <details class="faq">
-        <summary><span class="q">Q</span>여름에 부스 안이 덥지 않나요?</summary>
-        <div class="faq-a">
-          <p>소리를 막으려고 꼭 닫는 구조라, 아무 대비 없이 두면 더워요. 방음부스를 쓰는 분들이 가장 많이 하는 고민이기도 해요.</p>
-          <p>그래서 새벽방음은 <strong>실측 때 에어컨을 어떻게 할지부터 같이 정해요.</strong> 부스 안에 벽걸이·시스템 에어컨을 달거나, 창문을 내서 에어컨 바람이 들어오게 할 수 있어요. 에어컨 배관을 미리 빼 두시면 더 깔끔하게 시공돼요.</p>
-        </div>
-      </details>
-      <details class="faq">
-        <summary><span class="q">Q</span>윗집 발소리(층간소음)도 막아주나요?</summary>
-        <div class="faq-a">
-          <p>솔직히 말씀드리면 <strong>쿵쿵 울리는 발소리는 완전히 막기 어려워요.</strong> 건물 뼈대를 타고 오는 진동이라서요.</p>
-          <p>방음부스가 잘하는 건 부스 안의 노래·악기·방송 소리가 밖으로 새는 걸 막고, 바깥 말소리·TV 소리 같은 생활 소음을 줄이는 거예요. 어떤 소리가 고민인지 알려주시면 맞는 방법을 먼저 말씀드릴게요.</p>
-        </div>
-      </details>
-      <details class="faq">
-        <summary><span class="q">Q</span>월세·전세집인데 나갈 때 원상복구가 되나요?</summary>
-        <div class="faq-a">
-          <p>네. 벽·천장에 피스 구멍을 거의 남기지 않고, 바닥은 띄워서 짓는 데다 <strong>고무가 바닥에 물드는 걸 막는 보강재</strong>를 한 겹 더 대요. 철거하고 나면 바닥이 그대로예요.</p>
-          <p>원래 있던 천장 등 전선도 감아서 정리해 두고 필요한 선만 빼서 쓰기 때문에, 나갈 때 원래대로 되돌리기 쉬워요.</p>
-        </div>
-      </details>
-      <details class="faq">
-        <summary><span class="q">Q</span>이사 가면 부스를 가져갈 수 있나요?</summary>
-        <div class="faq-a">
-          <p>네. 조립식이라 해체해서 새 집에 다시 지어요. <strong>새 공간에 맞춰 크기를 늘리거나 창문을 더 다는 것</strong>도 할 수 있어요.</p>
-          <p>실제로 망원에서 쓰던 3,000×3,000 부스를 안양으로 옮기면서 3,000×3,600으로 늘리고 창문을 단 적이 있어요. 비용은 거리와 작업 범위에 따라 달라서 상담 때 알려드려요.</p>
-        </div>
-      </details>
-      <details class="faq">
-        <summary><span class="q">Q</span>홈페이지 가격 말고 추가로 드는 돈이 있나요?</summary>
-        <div class="faq-a">
-          <p>부스 가격은 <strong>바깥 크기(평수)와 내부 높이로 정해지고, 부가세와 서울·경기 설치비가 이미 들어 있어요.</strong></p>
-          <p>더해지는 건 창문·조명·문 추가 같은 옵션과 지방 출장비뿐이에요. 옵션 가격도 상담 때 미리 다 알려드리고, 실측 후 도면과 함께 최종 금액을 확정해요.</p>
-        </div>
-      </details>
-
     </div>
   </section>
 
@@ -576,8 +538,52 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
     </div>
   </section>
 
-  <!-- 견적문의 · 실측신청 -->
+  <!-- 자주 묻는 질문 + 견적문의 · 실측신청 (질문으로 마지막 걱정을 풀고 바로 상담으로) -->
   <section class="tint">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">자주 묻는 질문</div>
+        <h2>이런 걸 많이 물어보세요</h2>
+      </div>
+      <!-- 2026년 10월 경쟁사·커뮤니티 조사에서 손님들이 가장 많이 걱정한 것 (.claude/research 참고) -->
+      <div class="faqs">
+        <details class="faq">
+          <summary><span class="q">Q</span>여름에 부스 안이 덥지 않나요?</summary>
+          <div class="faq-a">
+            <p>소리를 막으려고 꼭 닫는 구조라, 아무 대비 없이 두면 더워요. 방음부스를 쓰는 분들이 가장 많이 하는 고민이기도 해요.</p>
+            <p>그래서 새벽방음은 <strong>실측 때 에어컨을 어떻게 할지부터 같이 정해요.</strong> 부스 안에 벽걸이·시스템 에어컨을 달거나, 창문을 내서 에어컨 바람이 들어오게 할 수 있어요. 에어컨 배관을 미리 빼 두시면 더 깔끔하게 시공돼요.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary><span class="q">Q</span>윗집 발소리(층간소음)도 막아주나요?</summary>
+          <div class="faq-a">
+            <p>솔직히 말씀드리면 <strong>쿵쿵 울리는 발소리는 완전히 막기 어려워요.</strong> 건물 뼈대를 타고 오는 진동이라서요.</p>
+            <p>방음부스가 잘하는 건 부스 안의 노래·악기·방송 소리가 밖으로 새는 걸 막고, 바깥 말소리·TV 소리 같은 생활 소음을 줄이는 거예요. 어떤 소리가 고민인지 알려주시면 맞는 방법을 먼저 말씀드릴게요.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary><span class="q">Q</span>월세·전세집인데 나갈 때 원상복구가 되나요?</summary>
+          <div class="faq-a">
+            <p>네. 벽·천장에 피스 구멍을 거의 남기지 않고, 바닥은 띄워서 짓는 데다 <strong>고무가 바닥에 물드는 걸 막는 보강재</strong>를 한 겹 더 대요. 철거하고 나면 바닥이 그대로예요.</p>
+            <p>원래 있던 천장 등 전선도 감아서 정리해 두고 필요한 선만 빼서 쓰기 때문에, 나갈 때 원래대로 되돌리기 쉬워요.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary><span class="q">Q</span>이사 가면 부스를 가져갈 수 있나요?</summary>
+          <div class="faq-a">
+            <p>네. 조립식이라 해체해서 새 집에 다시 지어요. <strong>새 공간에 맞춰 크기를 늘리거나 창문을 더 다는 것</strong>도 할 수 있어요.</p>
+            <p>실제로 망원에서 쓰던 3,000×3,000 부스를 안양으로 옮기면서 3,000×3,600으로 늘리고 창문을 단 적이 있어요. 비용은 거리와 작업 범위에 따라 달라서 상담 때 알려드려요.</p>
+          </div>
+        </details>
+        <details class="faq">
+          <summary><span class="q">Q</span>홈페이지 가격 말고 추가로 드는 돈이 있나요?</summary>
+          <div class="faq-a">
+            <p>부스 가격은 <strong>바깥 크기(평수)와 내부 높이로 정해지고, 부가세와 서울·경기 설치비가 이미 들어 있어요.</strong></p>
+            <p>더해지는 건 창문·조명·문 추가 같은 옵션과 지방 출장비뿐이에요. 옵션 가격도 상담 때 미리 다 알려드리고, 실측 후 도면과 함께 최종 금액을 확정해요.</p>
+          </div>
+        </details>
+      </div>
+    </div>
     <div class="wrap two">
       <div id="quote" class="box">
         <div class="eyebrow">견적문의</div>

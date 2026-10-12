@@ -316,6 +316,21 @@
   .winbar .dsnap{flex:0 0 auto}
   .winbar .dsnap > span:first-child{display:none}
   .setup .setup-body{gap:.6rem;padding-top:.6rem}
+/* 카톡 상담 */
+.ask{margin-top:14px;background:var(--surface);border:0.5px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.ask-head{display:flex;flex-direction:column;gap:2px}
+.ask-head b{font-size:15px;color:var(--text-primary)}
+.ask-spec span{white-space:nowrap}
+.ask-spec{font-size:12.5px;color:var(--text-secondary);font-variant-numeric:tabular-nums;word-break:keep-all}
+.ask-price{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding-top:8px;border-top:0.5px solid var(--border)}
+.ask-price span{font-size:13px;color:var(--text-secondary)}
+.ask-price b{font-size:20px;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.ask-note{margin:0;font-size:11.5px;line-height:1.55;color:var(--text-secondary);word-break:keep-all;text-wrap:pretty}
+.ask-go{font:inherit;font-size:15px;font-weight:700;min-height:48px;border:0;border-radius:10px;background:#FEE500;color:#191919;cursor:pointer}
+.ask-go:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.ask-msg{margin:0;font-size:12.5px;line-height:1.5;color:var(--text-primary);word-break:keep-all}
+.ask-msg:empty{display:none}
+.ask-txt{font:inherit;font-size:12.5px;line-height:1.5;width:100%;min-height:200px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:8px;background:var(--bg);color:var(--text-primary);resize:vertical;box-sizing:border-box}
 </style>
 
 <div class="page">
@@ -568,6 +583,19 @@
       </div>
     </div>
   </div>
+
+  <!-- 고객용: 지금 그린 부스로 카톡 상담 (문구를 복사해 두고 카톡 채널 채팅창을 연다) -->
+  <section class="ask" id="ask" aria-labelledby="ask-t">
+    <div class="ask-head">
+      <b id="ask-t">이 부스로 상담받기</b>
+      <span class="ask-spec" id="ask-spec">-</span>
+    </div>
+    <div class="ask-price"><span>예상 부스 가격</span><b id="ask-amt">-</b></div>
+    <p class="ask-note">부가세·서울·경기 설치비 포함 · 창문·조명 등 옵션은 따로예요 · 최종 금액은 실측 후 확정돼요</p>
+    <button type="button" class="ask-go" id="ask-go">이 견적으로 카톡 상담하기</button>
+    <p class="ask-msg" id="ask-msg" role="status"></p>
+    <textarea class="ask-txt" id="ask-txt" readonly hidden aria-label="카톡에 보낼 문구"></textarea>
+  </section>
 
 
 </div>
@@ -3381,6 +3409,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     paintDoorBar(d);
     paintWinBar(d);
     if (typeof paintQuote === 'function') paintQuote(d);
+    if (typeof paintAsk === 'function') paintAsk(d);
     paintLightBar();
     paintRoomBar(d);
     if (!yawUser){ ivw.yaw = autoCam(d).yaw; ivw.pitch = roomView() ? -24 : -10; }
@@ -3657,6 +3686,74 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     });
     paintQuoteSum(d);
   }
+  // ================= 카톡 상담 (홈페이지 고객용) =================
+  // 홈페이지 '크기별 가격'과 같은 표: 사장님 가격표 공급가(1~4평) × 1.1(부가세).
+  // 0.5평 칸은 1평→2평 기울기로 늘려 잡은 값. 더블은 1평 미만도 1평 가격. 4평 넘으면 3→4평 기울기로 늘린다.
+  var ASK_PY = [0.5, 1, 2, 3, 4];
+  var ASK_PT = {
+    single: [2803811, 3627403, 5274587, 7141770, 9008954],
+    super:  [3529798, 4390968, 6113309, 8055650, 9997991],
+    double: [6199096, 6199096, 8016300, 10066709, 12123954]
+  };
+  var ASK_HMUL = { 2000:1, 2200:1.075, 2400:1.15 };
+  var KAKAO_CHAT = 'https://pf.kakao.com/_TGWFX/chat';
+  function askPrice(d){
+    var t = ASK_PT[boothType] || ASK_PT.single, py = Math.max(0.5, pyOf(d)), i = 0;
+    while (i < ASK_PY.length - 2 && py > ASK_PY[i+1]) i++;
+    var v = t[i] + (t[i+1] - t[i]) * (py - ASK_PY[i]) / (ASK_PY[i+1] - ASK_PY[i]);
+    var h = Math.round(d.ih / 100) * 100;
+    v *= ASK_HMUL[h] || (h > 2400 ? 1.15 : 1);
+    return Math.round(v * 1.1);                                           // 부가세 포함
+  }
+  function askManwon(n){ return '약 ' + Math.round(n / 10000).toLocaleString('ko-KR') + '만원'; }
+  function askText(d){
+    var py = pyOf(d), L = [];
+    L.push('[새벽방음 시뮬레이터로 상담 문의]');
+    L.push('· 부스: ' + d.b.name);
+    L.push('· 바깥 크기: 가로 ' + fmt(d.W) + ' × 세로 ' + fmt(d.D) + ' × 높이 ' + fmt(d.H) + 'mm');
+    L.push('· 안쪽 크기: ' + fmt(d.iw) + ' × ' + fmt(d.id) + ' × 높이 ' + fmt(d.ih) + 'mm');
+    L.push('· 평수: ' + py.toFixed(1) + '평 (바깥 기준)');
+    L.push('· 마감: 아트보드 ' + PALETTE.wall[active.wall].name + ' · 마루 ' + PALETTE.floor[active.floor].name
+           + ' · 몰딩 ' + PALETTE.molding[active.molding].name);
+    L.push('· 타공판: ' + (perfSlots.length ? PALETTE.perf[active.perf].name + ' ' + perfSlots.length + '장' : '없음'));
+    var nd = doors.filter(function(x){ return x.face !== 'none'; });
+    L.push('· 문: ' + (nd.length ? nd.length + '개 (' + nd.map(function(x){ return x.w; }).join('·') + 'mm)' : '없음'));
+    L.push('· 창문: ' + (wins.length ? wins.length + '개 (' + wins.map(function(x){ return x.w + '×' + x.h; }).join('·') + ')' : '없음'));
+    var lt = [];
+    if (lightCfg.room) lt.push('방등');
+    if (lightCfg.rail !== 'none') lt.push('레일등 ' + (RAIL_KO[lightCfg.rail] || ''));
+    L.push('· 조명: ' + (lt.length ? lt.join(' + ') + ' · ' + (CCT_KO[lightCfg.cct] || '') : '없음'));
+    L.push('· 예상 부스 가격: ' + askManwon(askPrice(d)) + ' (부가세 포함, 옵션 별도)');
+    L.push('');
+    L.push('· 시공 지역: ');
+    L.push('· 용도(보컬·악기·방송 등): ');
+    return L.join('\n');
+  }
+  function paintAsk(d){
+    if (!d) return;
+    var sp = document.getElementById('ask-spec'); if (!sp) return;
+    sp.innerHTML = [d.b.name, '바깥 ' + fmt(d.W) + '×' + fmt(d.D), '안쪽 높이 ' + fmt(d.ih), pyOf(d).toFixed(1) + '평']
+      .map(function(t){ return '<span>' + t + '</span>'; }).join(' · ');
+    document.getElementById('ask-amt').textContent = askManwon(askPrice(d));
+    var ta = document.getElementById('ask-txt'); if (!ta.hidden) ta.value = askText(d);
+  }
+  (function(){
+    var go = document.getElementById('ask-go'); if (!go) return;
+    go.addEventListener('click', function(){
+      if (!curDims) return;
+      var txt = askText(curDims), ta = document.getElementById('ask-txt'), msg = document.getElementById('ask-msg');
+      ta.value = txt; ta.hidden = false;
+      var ok = false;
+      try { ta.focus(); ta.select(); ta.setSelectionRange(0, txt.length); ok = document.execCommand('copy'); } catch (e) {}
+      try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function(){}, function(){}); } catch (e) {}
+      try { ta.setSelectionRange(0, 0); } catch (e) {}
+      ta.scrollTop = 0; ta.blur();
+      msg.textContent = ok
+        ? '부스 정보를 복사했어요. 열리는 카톡 채팅창에 붙여넣기(길게 눌러 붙여넣기) 해서 보내주세요.'
+        : '아래 문구를 길게 눌러 복사한 뒤, 열리는 카톡 채팅창에 붙여넣어 보내주세요.';
+      window.open(KAKAO_CHAT, '_blank', 'noopener');
+    });
+  })();
   function quoteText(d){
     var py = Math.round(d.W*d.D/1000000/3.3058*10)/10, L = [];
     L.push('[새벽방음 견적]');

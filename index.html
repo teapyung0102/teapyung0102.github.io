@@ -69,6 +69,9 @@ section{padding-block:56px}
 .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding-bottom:10px}
 .tabs a{display:flex;align-items:center;justify-content:center;min-height:36px;padding:0 4px;border:1px solid var(--night-line);border-radius:999px;font-size:13px;font-weight:600;color:var(--night-sub);white-space:nowrap}
 .tabs a:hover{color:var(--night-text);border-color:var(--night-sub)}
+.tabs a.on{color:var(--night-text);border-color:var(--dawn)}
+@media (max-width:719px){.tabs a.t-contact{display:none}}
+@media (min-width:720px) and (max-width:999px){.tabs{grid-template-columns:repeat(6,minmax(0,1fr))}}
 .tabs a.hl{background:var(--dawn);border-color:var(--dawn);color:var(--night)}
 
 /* 히어로 */
@@ -296,9 +299,10 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
     <nav class="tabs" aria-label="주요 메뉴">
       <a href="#about">회사소개</a>
       <a href="#cases">시공사례</a>
+      <a class="t-move" href="move/">부스 이전</a>
       <a href="#quote">견적문의</a>
       <a href="#measure">실측신청</a>
-      <a href="#contact">Contact</a>
+      <a class="t-contact" href="#contact">Contact</a>
     </nav>
   </div>
 </header>

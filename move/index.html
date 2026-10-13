@@ -63,8 +63,8 @@ section{padding-block:56px}
 .tabs a{display:flex;align-items:center;justify-content:center;min-height:36px;padding:0 4px;border:1px solid var(--night-line);border-radius:999px;font-size:13px;font-weight:600;color:var(--night-sub);white-space:nowrap}
 .tabs a:hover{color:var(--night-text);border-color:var(--night-sub)}
 .tabs a.on{color:var(--night-text);border-color:var(--dawn)}
-@media (max-width:719px){.tabs a.t-contact{display:none}}
-@media (min-width:720px) and (max-width:999px){.tabs{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (max-width:719px){.tabs a.t-contact,.tabs a.t-measure{display:none}}
+@media (min-width:720px) and (max-width:999px){.tabs{grid-template-columns:repeat(7,minmax(0,1fr))}}
 
 /* 첫 화면 */
 .hero{padding-block:40px 56px}
@@ -189,10 +189,11 @@ footer a{text-decoration:underline;text-underline-offset:3px}
     <div class="brand"><a class="logo" href="../"><span class="mark"><i></i></span>새벽방음</a></div>
     <nav class="tabs" aria-label="주요 메뉴">
       <a href="../#about">회사소개</a>
+      <a class="t-price" href="../price/">가격</a>
       <a href="../#cases">시공사례</a>
       <a class="t-move on" href="./" aria-current="page">부스 이전</a>
       <a href="../#quote">견적문의</a>
-      <a href="../#measure">실측신청</a>
+      <a class="t-measure" href="../#measure">실측신청</a>
       <a class="t-contact" href="../#contact">Contact</a>
     </nav>
   </div>
@@ -371,7 +372,7 @@ footer a{text-decoration:underline;text-underline-offset:3px}
           <a class="btn btn-kakao" href="https://pf.kakao.com/_TGWFX/chat" target="_blank" rel="noopener">카톡으로 보내기</a>
           <a class="btn btn-line" href="tel:01041894529">010-4189-4529</a>
         </div>
-        <p class="back">새로 짓는 부스가 궁금하시면 <a href="../#booths">부스 종류와 가격 보기 →</a></p>
+        <p class="back">새로 짓는 부스가 궁금하시면 <a href="../price/">방음부스 가격 보기 →</a></p>
       </div>
     </div>
   </section>

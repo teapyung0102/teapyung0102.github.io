@@ -181,6 +181,28 @@ footer a{text-decoration:underline;text-underline-offset:3px}
 }
 @media (prefers-reduced-motion:reduce){html.smooth{scroll-behavior:auto}}
 </style>
+<!-- 방문자 수 (구글 애널리틱스). GA_ID에 측정 ID(G-로 시작)를 넣으면 세기 시작함. 세 페이지(메인·price·move) 같이 고칠 것.
+     사장님 기기는 주소 끝에 #nocount 를 붙여 한 번 열면 그 브라우저 방문은 안 셈 (#count 로 되돌림) -->
+<script>
+(function(){
+  var GA_ID='';
+  function toggle(){
+    try{
+      if(location.hash==='#nocount'){localStorage.setItem('sb-nocount','1');alert('이 브라우저에서 들어온 방문은 이제 방문자 수에 안 들어가요.');}
+      else if(location.hash==='#count'){localStorage.removeItem('sb-nocount');alert('이 브라우저 방문도 다시 방문자 수에 들어가요.');}
+      else return;
+      history.replaceState(null,'',location.pathname+location.search);
+    }catch(e){}
+  }
+  toggle();addEventListener('hashchange',toggle);
+  var off=false;
+  try{off=localStorage.getItem('sb-nocount')==='1';}catch(e){}
+  if(!GA_ID||off)return;
+  var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};
+  gtag('js',new Date());gtag('config',GA_ID);
+})();
+</script>
 </head>
 <body>
 

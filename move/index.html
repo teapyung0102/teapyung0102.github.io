@@ -107,6 +107,17 @@ section{padding-block:56px}
 .quote{padding:14px 16px;border-left:3px solid var(--dawn);background:var(--card);border-radius:0 10px 10px 0;font-size:15px;line-height:1.75;color:var(--ink-2)}
 .links{display:flex;flex-wrap:wrap;gap:8px 16px}
 .links a{font-size:14px;font-weight:600;color:var(--dawn-ink)}
+/* 이전 영상: 처음엔 썸네일만, 누르면 그 자리에서 유튜브 재생 (메인과 같은 부품) */
+.movie{margin-top:32px;max-width:760px}
+.movie-t{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px}
+.movie-t b{font-size:16px}
+.movie-t span{font-size:14px;color:var(--ink-3)}
+.yt{position:relative;display:block;width:100%;aspect-ratio:16/9;padding:0;border:0;border-radius:14px;overflow:hidden;background:#111;cursor:pointer}
+.yt img{width:100%;height:100%;object-fit:cover;display:block}
+.yt .play{position:absolute;left:50%;top:50%;width:68px;height:48px;transform:translate(-50%,-50%)}
+.yt:hover .play path:first-child,.yt:focus-visible .play path:first-child{fill:#FF0000;fill-opacity:1}
+.yt:focus-visible{outline:3px solid var(--dawn);outline-offset:3px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .mini{margin-top:32px;padding:22px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:8px}
 .mini h3{font-size:18px}
 .mini p{font-size:15px;line-height:1.75;color:var(--ink-2)}
@@ -283,6 +294,10 @@ footer a{text-decoration:underline;text-underline-offset:3px}
           </div>
         </div>
       </div>
+      <div class="movie">
+        <p class="movie-t"><b>영상으로 보기</b><span>망원에서 안양으로, 600mm 늘려 옮긴 현장</span></p>
+        <button type="button" class="yt" data-yt="9uxAVwdE8Lo" aria-label="안양 일렉기타 교습소 방음부스 증축 이전 영상 재생"><img src="https://i.ytimg.com/vi/9uxAVwdE8Lo/hqdefault.jpg" alt="" loading="lazy"><svg class="play" viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z" fill="#212121" fill-opacity=".85"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></button>
+      </div>
       <div class="mini">
         <span class="eyebrow">변경 사례</span>
         <h3>일산, 쓰던 부스에 창문만 추가</h3>
@@ -414,6 +429,19 @@ footer a{text-decoration:underline;text-underline-offset:3px}
   <a class="m-kakao" href="https://pf.kakao.com/_TGWFX/chat" target="_blank" rel="noopener">카톡 상담</a>
 </nav>
 
+<script>
+// 시공 영상: 누르면 썸네일 자리에 유튜브 플레이어를 넣는다 (처음부터 넣으면 페이지가 무거워짐)
+document.querySelectorAll('.yt[data-yt]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-yt')+'?autoplay=1&rel=0&playsinline=1';
+    f.title=b.getAttribute('aria-label').replace(/ 재생$/,'');
+    f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen=true;
+    f.referrerPolicy='strict-origin-when-cross-origin';   // 유튜브는 어느 사이트에서 틀었는지 알아야 재생됨
+    var box=document.createElement('div'); box.className='yt'; box.appendChild(f); b.replaceWith(box);
+  });
+});
+</script>
 <script>addEventListener('load',function(){setTimeout(function(){document.documentElement.classList.add('smooth');},300);});</script>
 </body>
 </html>

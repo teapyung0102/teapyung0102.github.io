@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 (async()=>{const b=await chromium.launch({proxy:{server:process.env.HTTPS_PROXY},args:['--ignore-certificate-errors']});
-for (const f of ['index.html','simulator.html']) for (const w of [360,375,390,412,768,1024,1280,1440]){
+for (const f of ['index.html','simulator.html','move/index.html']) for (const w of [360,375,390,412,768,1024,1280,1440]){
 const p=await b.newPage({viewport:{width:w,height:900}});await p.goto('file://'+process.cwd()+'/'+f);await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(800);
 const res=await p.evaluate(()=>{const out=[];for(const el of document.querySelectorAll('h1,h2,h3,h4,p,li,dd,dt,small,span,a,button,label,td,th,div')){
  if(![...el.childNodes].some(n=>n.nodeType==3&&n.textContent.trim()))continue; if(el.offsetParent===null)continue;

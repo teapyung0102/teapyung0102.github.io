@@ -636,7 +636,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
   var GROUPS = ['wall','floor','molding','perf'];
   var active = { wall:0, floor:0, molding:0, perf:0 };
   var perfSlots = [];   // placed {face, col}
-  var perfMax = 2;      // 고객이 넣을 타공판 장수
+  var perfMax = 0;      // 고객이 넣은 타공판 장수 (타공판은 옵션: 기본 0장)
   var tapPlace = true;  // 3D를 탭해서 배치. 고객에게 보여줄 땐 꺼두면 안전
   // 문은 여러 개 둘 수 있다. door 는 문 탭에서 지금 고치고 있는 문.
   var doors = [ { face:'front', pos:null, w:805, h:1800, hinge:'r' } ];   // pos=null 이면 오른쪽 끝 · 문틀 높이 1800 고정
@@ -1248,11 +1248,13 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
     if (reaim === false){ yawUser = true; ivw.distUser = true; }   // 화면을 직접 탭 → 시점 고정
     else { yawUser = false; }                                      // 평면도에서 바꿈 → 다시 조준
     var at = perfSlots.findIndex(function(s){ return s.face === faceKey && s.col === col; });
-    if (at >= 0) perfSlots.splice(at, 1);             // 이미 놓인 자리를 다시 누르면 뺀다
+    if (at >= 0){ perfSlots.splice(at, 1); perfMax = perfSlots.length; syncCount(); }   // 이미 놓인 자리를 다시 누르면 뺀다
     else {
-      if (perfMax < 1){ perfMax = 1; syncCount(); }
+      // 타공판은 옵션: 누르는 만큼 늘어난다 (예전처럼 2장에서 먼저 놓은 걸 옮기지 않음)
       perfSlots.push({ face: faceKey, col: col });
+      perfMax = Math.min(PERF_LIMIT, Math.max(perfMax, perfSlots.length));
       while (perfSlots.length > perfMax) perfSlots.shift();
+      syncCount();
     }
     refresh();
   }
@@ -1678,9 +1680,8 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
   var FINE = !!(window.matchMedia && matchMedia('(hover:hover) and (pointer:fine)').matches);  // 마우스로 보는 컴퓨터
   var TAP = FINE ? '클릭' : '터치';
   function perfLabel(){
-    if (perfMax === 0) return '타공판 없이 진행';
     if (!perfSlots.length) return tapPlace
-      ? '3D에서 벽을 ' + TAP + '하면 그 자리에 타공판이 놓입니다 (다시 ' + TAP + '하면 빠져요)'
+      ? '타공판은 옵션이에요 · 3D에서 벽을 ' + TAP + '하면 그 자리에 놓여요 (다시 ' + TAP + '하면 빠져요)'
       : '도면 탭에서 칸을 눌러 자리를 정하세요 · 3D에서 바로 놓으려면 «탭 배치»';
     var txt = perfSlots.map(function(s){
       var L = curDims ? slotRect(curDims, s.face, s.col) : null;
@@ -1689,8 +1690,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
       return FACE_KO[s.face] + ' ' + (s.col+1) + '번째'
            + (L && L.w < MODULE_MM - 1 ? '(' + fmt(L.w) + ' 재단)' : '');
     }).join(' · ');
-    return perfSlots.length + '/' + perfMax + '장 배치 — ' + txt +
-      (perfSlots.length < perfMax ? ' · ' + (perfMax - perfSlots.length) + '장 남음' : '');
+    return '타공판 ' + perfSlots.length + '장 (옵션) — ' + txt;
   }
 
   function build(){
@@ -3519,7 +3519,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
   var PRICE_TABLE = { single:[0,0], super:[0,0], double:[0,0] };
   var REGION_AMT = { '서울/경기':0, '충청':0, '강원':0, '전북/경북':0, '전남/경남':0, '제주':0 };
   var WIN_AMT = 0, RAIL_AMT = 0, RAIL_PANEL_AMT = 0;
-  var DOOR_ADD_AMT = 0, PERF_ADD_AMT = 0, PERF_FREE = 2, EXT_BOARD_AMT = 0, EXT_PERF_AMT = 0;
+  var DOOR_ADD_AMT = 0, PERF_ADD_AMT = 0, PERF_FREE = 0, EXT_BOARD_AMT = 0, EXT_PERF_AMT = 0;
   function pyOf(d){ return Math.round(d.W*d.D/1000000/3.3058*10)/10; }        // 외경 기준, 0.1평 반올림
   function boothPrice(d){
     var t = PRICE_TABLE[boothType] || PRICE_TABLE.single;
@@ -3554,7 +3554,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
         : '문 없음' });
     var pc = perfMax;
     items.push({ k:'perf', name:'타공판 추가', auto: Math.max(0, pc - PERF_FREE)*PERF_ADD_AMT,
-      desc: pc ? '타공판 ' + pc + '장 · ' + PALETTE.perf[active.perf].name + ' · ' + PERF_FREE + '장 기본' : '타공판 없음' });
+      desc: pc ? '타공판 ' + pc + '장 · ' + PALETTE.perf[active.perf].name + (PERF_FREE ? ' · ' + PERF_FREE + '장 기본' : '') : '타공판 없음' });
     if (roomOn){
       var ex = exposedList(d);
       if (ex.length){
@@ -4064,19 +4064,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
   Promise.all(keys.map(function(k){ return loadImage(TEX[k]); })).then(function(list){
     keys.forEach(function(k,i){ if (list[i]) imgs[k] = list[i]; });
     paintSwatches();
-    refresh();
-    if (!perfSlots.length && curDims){
-      // 기본 타공판 2장: 뒷벽·좌측벽의 온장(600) 칸에 하나씩
-      ['back','left','right'].forEach(function(f){
-        if (perfSlots.length >= 2) return;
-        var n = modCount(curDims, f);
-        for (var c = 1; c <= n; c++){
-          var col = c % n, L = slotRect(curDims, f, col);
-          if (moduleOk(curDims, f, col) && L && L.w >= MODULE_MM - 1){ perfSlots.push({ face:f, col:col }); break; }
-        }
-      });
-      refresh();
-    }
+    refresh();   // 타공판은 옵션이라 처음엔 하나도 놓지 않는다 (예전엔 2장 기본)
   });
 
   
@@ -4107,7 +4095,7 @@ var TEX = {"f1706": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYE
   var en=document.getElementById('lt-enote'); if(en) en.style.display='none';
   var pb=document.querySelector('.perfbar');
   if(pb){ var p=document.createElement('p'); p.className='perfnote';
-    p.innerHTML='<b>벽의 아트보드를 누르면 그 자리가 타공판으로 바뀌어요.</b> 타공판을 다시 누르면 빠져요. 타공판은 2장이 기본이라, 2장이 다 놓인 상태에서 새 자리를 누르면 먼저 놓은 타공판이 그쪽으로 옮겨가요.';
+    p.innerHTML='<b>벽의 아트보드를 누르면 그 자리가 타공판으로 바뀌어요.</b> 타공판을 다시 누르면 빠져요. 타공판은 기본으로 들어가지 않는 옵션이라, 원하는 자리에 원하는 만큼 넣어 보세요.';
     pb.parentNode.insertBefore(p, pb.nextSibling); }
   // 홈페이지 안에 넣었을 때 높이를 알려준다
   function tell(){ try{ parent.postMessage({ sbSimH: document.documentElement.scrollHeight }, '*'); }catch(e){} }

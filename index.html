@@ -148,13 +148,19 @@ section{padding-block:56px}
 .incl span{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--ground);border:1px solid var(--line);color:var(--ink-2)}
 .ptable .note{line-height:1.7}
 /* 새벽방음이 다른 점 */
-.diffs{display:grid;gap:12px;margin:0;padding:0;list-style:none;counter-reset:d}
-.diff{counter-increment:d;padding:22px;border:1px solid var(--night-line);border-radius:14px;background:var(--night-2);display:flex;flex-direction:column;gap:8px}
-.diff::before{content:counter(d,decimal-leading-zero);font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--dawn)}
-.diff h3{font-size:18px;color:var(--night-text)}
-.diff p{font-size:15px;line-height:1.75;color:var(--night-sub)}
+/* 다른 점: 제목만 보이고, 누르면 설명이 펼쳐짐 */
+.diffs{display:grid;gap:10px;margin:0;padding:0;list-style:none;counter-reset:d;align-items:start}
+.diff{counter-increment:d;border:1px solid var(--night-line);border-radius:14px;background:var(--night-2)}
+.diff summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:18px 20px}
+.diff summary::-webkit-details-marker{display:none}
+.diff summary::before{content:counter(d,decimal-leading-zero);flex:none;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--dawn)}
+.diff summary::after{content:'+';margin-left:auto;flex:none;font-size:22px;font-weight:400;line-height:1;color:var(--night-sub)}
+.diff details[open] summary::after{content:'−'}
+.diff summary:focus-visible{outline:3px solid var(--dawn);outline-offset:-3px;border-radius:14px}
+.diff h3{font-size:17px;color:var(--night-text)}
+.diff p{padding:0 20px 20px;font-size:15px;line-height:1.75;color:var(--night-sub)}
 .diff-more{margin-top:20px;font-size:14px;color:var(--night-sub)}
-.diff .diff-link{margin-top:auto;padding-top:4px;font-size:14px;font-weight:600;color:var(--dawn)}
+.diff .diff-link{display:inline-block;margin:-8px 20px 20px;font-size:14px;font-weight:600;color:var(--dawn)}
 .faq-a a.more{font-size:14px;font-weight:600;color:var(--dawn-ink)}
 footer .flinks a{text-decoration:underline;text-underline-offset:3px}
 .diff-more a{color:var(--dawn);font-weight:600}
@@ -453,12 +459,12 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         <p>다 지은 부스는 겉으로 보면 다 비슷해요. 차이는 바닥 밑, 벽 속, 마감 한 줄에서 납니다.</p>
       </div>
       <ul class="diffs">
-        <li class="diff"><h3>바닥을 띄워서 짓습니다</h3><p>고무 → 흡음재 → 바닥판, 3단으로 바닥을 띄워요. 아래층으로 가는 울림을 줄이고, 방 바닥과 사이에 공기가 통해 곰팡이와 바닥 변색을 막아요.</p></li>
-        <li class="diff"><h3>바닥에 자국을 남기지 않아요</h3><p>고무가 바닥에 바로 닿으면 물이 들 수 있어서 보강재를 한 겹 더 대요. 철거하거나 이사 갈 때도 바닥이 그대로라 월세·전세집도 안심이에요.</p></li>
-        <li class="diff"><h3>카펫 대신 본드 없는 강화마루</h3><p>카펫은 시간이 지나면 냄새가 배고 청소가 어려워요. 일반 가정집보다 두꺼운 강화마루를 접착제 없이 깔아서 냄새가 적고, 옮길 때 다시 쓸 수 있어요.</p></li>
-        <li class="diff"><h3>E0 등급 목재만 씁니다</h3><p>흔히 쓰는 E1 등급보다 포름알데히드가 3분의 1 수준인 E0 등급 자재로 뼈대와 바닥판을 만들어요. 오래 머무는 작은 방이니까요.</p></li>
-        <li class="diff"><h3>옮기고, 늘리고, 더할 수 있어요</h3><p>이사할 때 해체해서 새 집에 다시 지어요. 옮기면서 크기를 늘리거나, 다 쓰던 부스에 창문만 더 다는 것도 할 수 있어요.</p><a class="diff-link" href="move/">이전·증축·철거 자세히 보기 →</a></li>
-        <li class="diff"><h3>음악PD가 처음부터 끝까지</h3><p>상담·실측·도면·시공부터 A/S까지 대표가 직접 전담해요. 소리가 어디로 새는지, 부스 안에서 소리가 어떻게 들려야 하는지 아는 사람이 실리콘 한 줄까지 마무리합니다.</p></li>
+        <li class="diff"><details><summary><h3>바닥을 띄워서 짓습니다</h3></summary><p>고무 → 흡음재 → 바닥판, 3단으로 바닥을 띄워요. 아래층으로 가는 울림을 줄이고, 방 바닥과 사이에 공기가 통해 곰팡이와 바닥 변색을 막아요.</p></details></li>
+        <li class="diff"><details><summary><h3>바닥에 자국을 남기지 않아요</h3></summary><p>고무가 바닥에 바로 닿으면 물이 들 수 있어서 보강재를 한 겹 더 대요. 철거하거나 이사 갈 때도 바닥이 그대로라 월세·전세집도 안심이에요.</p></details></li>
+        <li class="diff"><details><summary><h3>카펫 대신 본드 없는 강화마루</h3></summary><p>카펫은 시간이 지나면 냄새가 배고 청소가 어려워요. 일반 가정집보다 두꺼운 강화마루를 접착제 없이 깔아서 냄새가 적고, 옮길 때 다시 쓸 수 있어요.</p></details></li>
+        <li class="diff"><details><summary><h3>E0 등급 목재만 씁니다</h3></summary><p>흔히 쓰는 E1 등급보다 포름알데히드가 3분의 1 수준인 E0 등급 자재로 뼈대와 바닥판을 만들어요. 오래 머무는 작은 방이니까요.</p></details></li>
+        <li class="diff"><details><summary><h3>옮기고, 늘리고, 더할 수 있어요</h3></summary><p>이사할 때 해체해서 새 집에 다시 지어요. 옮기면서 크기를 늘리거나, 다 쓰던 부스에 창문만 더 다는 것도 할 수 있어요.</p><a class="diff-link" href="move/">이전·증축·철거 자세히 보기 →</a></details></li>
+        <li class="diff"><details><summary><h3>음악PD가 처음부터 끝까지</h3></summary><p>상담·실측·도면·시공부터 A/S까지 대표가 직접 전담해요. 소리가 어디로 새는지, 부스 안에서 소리가 어떻게 들려야 하는지 아는 사람이 실리콘 한 줄까지 마무리합니다.</p></details></li>
       </ul>
       <p class="diff-more">시공 과정은 <a href="https://blog.naver.com/saebyeok0711" target="_blank" rel="noopener">네이버 블로그</a>에 단계별 사진으로 올려 두었어요.</p>
     </div>

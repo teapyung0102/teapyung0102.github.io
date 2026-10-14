@@ -214,6 +214,13 @@ a.case:hover b{text-decoration:underline}
 .short .sh .play{position:absolute;left:50%;top:50%;width:44px;height:31px;transform:translate(-50%,-50%)}
 .short:hover .play path:first-child,.short:focus-visible .play path:first-child{fill:#FF0000;fill-opacity:1}
 .short b{font-size:13px;line-height:1.45}
+/* 부스 이전 배너: 안양 이전 현장 사진 위에 한 줄 */
+.move-band{padding-block:56px;background:linear-gradient(rgba(23,26,40,.78),rgba(23,26,40,.78)),url(photos/case2/anyang-1.jpg) center/cover}
+.move-band .wrap{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.move-band h2{font-family:var(--serif);font-size:clamp(26px,6vw,36px);line-height:1.3}
+.move-band p{color:var(--night-sub);font-size:15px;line-height:1.7}
+.move-band .btn{margin-top:10px}
+@media (min-width:720px){.move-band{padding-block:72px}}
 /* 시공사례 탭 */
 .ctabs{display:flex;gap:4px;margin:0 0 20px;padding:4px;width:max-content;max-width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px}
 .ctabs button{flex:1;min-height:44px;padding:0 20px;border:0;border-radius:9px;background:none;font:inherit;font-size:15px;font-weight:600;color:var(--ink-3);cursor:pointer;white-space:nowrap}
@@ -537,6 +544,16 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         <a class="blog-btn" href="https://blog.naver.com/saebyeok0711" target="_blank" rel="noopener">네이버 블로그에서 시공사례 더 보기 →</a>
         <a class="blog-btn yt-btn" href="https://www.youtube.com/@saebyeok0711" target="_blank" rel="noopener">유튜브 채널에서 영상 더 보기 →</a>
       </div>
+    </div>
+  </section>
+
+  <!-- 부스 이전 배너 (자세한 내용은 move/ 페이지) -->
+  <section class="move-band dark" aria-labelledby="move-band-t">
+    <div class="wrap">
+      <div class="eyebrow">부스 이전 · 증축 · 철거</div>
+      <h2 id="move-band-t">이사 가도 걱정 마세요</h2>
+      <p>쓰던 방음부스를 새 집에 맞춰 옮겨 드려요. 다른 업체 부스도 상담 후 가능해요.</p>
+      <a class="btn btn-main" href="move/">부스 이전 자세히 보기 →</a>
     </div>
   </section>
 

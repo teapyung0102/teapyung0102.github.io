@@ -143,6 +143,8 @@ section{padding-block:56px}
 .cmp tbody th{width:24%;text-align:left;padding-left:14px;font-size:15px;font-weight:600;color:var(--ink)}
 .cmp .ours{background:#FBF1E8}
 .cmp thead th.ours{background:var(--dawn);color:#fff}
+.cmp td.ours{box-shadow:inset 2px 0 0 var(--dawn),inset -2px 0 0 var(--dawn)}
+.cmp tbody tr:last-child td.ours{box-shadow:inset 2px 0 0 var(--dawn),inset -2px 0 0 var(--dawn),inset 0 -2px 0 var(--dawn)}
 .cmp .mk{display:block;margin:0 auto;width:24px;height:24px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .cmp .mk.o{stroke:var(--dawn-ink)}
 .cmp .mk.x{stroke:#A3A5AC}
@@ -419,18 +421,18 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         <p class="about-lead">새벽방음은 이 둘을 모두 잡은 <strong class="kw">‘조립식 고정형 방음부스’</strong>를 시공합니다.</p>
         <p class="about-pd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>현직 음악PD가 직접 제작·시공합니다</p>
       </div>
-      <!-- 비교표: 예전 '3가지 포인트'와 시뮬레이터 아래 '조립식 고정형이 뭔가요' 질문을 합침 (같은 말을 세 번 하던 것).
+      <!-- 비교표 (새벽방음은 가운데 = 둘의 장점을 합친 자리, 주황으로 감쌈): 예전 '3가지 포인트'와 시뮬레이터 아래 '조립식 고정형이 뭔가요' 질문을 합침 (같은 말을 세 번 하던 것).
            ○·× 는 폰마다 다르게 보이지 않게 그림(svg). 조립식 자체가 샌다는 인상을 주지 않게 방음은 모두 ○ -->
       <div class="cmp">
         <h3 class="cmp-t">조립식 고정형 방음부스, 무엇이 다른가요?</h3>
         <p class="cmp-d">쉽게 말하면, 방 안에 우리 방 크기에 꼭 맞는 <b>‘방 속의 방’</b>을 <span class="nw">하나 더 짓는 거예요.</span></p>
         <table>
-          <thead><tr><th><span class="sr">항목</span></th><th>간편 조립식</th><th>고정형 공사</th><th class="ours">새벽방음</th></tr></thead>
+          <thead><tr><th><span class="sr">항목</span></th><th>간편 조립식</th><th class="ours">새벽방음</th><th>고정형 공사</th></tr></thead>
           <tbody>
-            <tr><th>방음</th><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>가능</small></td><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>확실</small></td><td class="ours"><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>고정형 수준</small></td></tr>
-            <tr><th>집 손상</th><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>적음</small></td><td><svg class="mk x" viewBox="0 0 20 20"><path d="M4 4l12 12M16 4 4 16"/></svg><small>뜯고 공사</small></td><td class="ours"><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>거의 없음</small></td></tr>
-            <tr><th>크기 맞춤</th><td><svg class="mk x" viewBox="0 0 20 20"><path d="M4 4l12 12M16 4 4 16"/></svg><small>정해진 크기</small></td><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>가능</small></td><td class="ours"><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>mm 단위</small></td></tr>
-            <tr><th>월세·전세</th><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>가능</small></td><td><svg class="mk x" viewBox="0 0 20 20"><path d="M4 4l12 12M16 4 4 16"/></svg><small>어려움</small></td><td class="ours"><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>가능</small></td></tr>
+            <tr><th>방음</th><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>가능</small></td><td class="ours"><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>고정형 수준</small></td><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>확실</small></td></tr>
+            <tr><th>집 손상</th><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>적음</small></td><td class="ours"><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>거의 없음</small></td><td><svg class="mk x" viewBox="0 0 20 20"><path d="M4 4l12 12M16 4 4 16"/></svg><small>뜯고 공사</small></td></tr>
+            <tr><th>크기 맞춤</th><td><svg class="mk x" viewBox="0 0 20 20"><path d="M4 4l12 12M16 4 4 16"/></svg><small>정해진 크기</small></td><td class="ours"><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>mm 단위</small></td><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>가능</small></td></tr>
+            <tr><th>월세·전세</th><td><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>가능</small></td><td class="ours"><svg class="mk o" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/></svg><small>가능</small></td><td><svg class="mk x" viewBox="0 0 20 20"><path d="M4 4l12 12M16 4 4 16"/></svg><small>어려움</small></td></tr>
           </tbody>
         </table>
       </div>

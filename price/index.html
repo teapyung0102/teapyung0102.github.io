@@ -239,6 +239,28 @@ footer a{text-decoration:underline;text-underline-offset:3px}
   .extra{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (min-width:1000px){.colors .full .swatches{grid-template-columns:repeat(11,minmax(0,1fr))}}
+
+/* 정렬 체계 (2026-10-18, 참고: 뮤트홈·사운드블럭): 칸 제목과 짧은 카드 글은 가운데,
+   긴 목록(다른 점·자주 묻는 질문)·신청 상자·표 안 글은 읽기 쉽게 왼쪽 그대로 */
+.head{align-items:center;text-align:center}
+.head p{margin-inline:auto}
+.about-pd{align-self:center}
+.booth-body{text-align:center;align-items:center}
+.price{justify-content:center}
+.diff-more{text-align:center}
+.ctabs{margin-inline:auto}
+.case,.vid,.short{text-align:center}
+.cbtn{align-items:center;text-align:center}
+/* 아래 상담 칸(.ask): 제목·목록·버튼을 한 줄로 가운데에 (목록 글은 왼쪽 정렬된 채로 덩어리만 가운데) */
+.ask{justify-items:center;text-align:center}
+.ask > div{align-items:center;width:100%}
+.ask .checks{width:max-content;max-width:100%;text-align:left}
+.ask .btns{width:100%;max-width:440px}
+@media (min-width:720px){.ask{grid-template-columns:1fr;gap:28px}}
+@media (min-width:720px){
+  .more-btn{display:flex;width:max-content;margin-inline:auto}
+  .case-links{justify-content:center}
+}
 </style>
 <!-- 방문자 수 (구글 애널리틱스). GA_ID에 측정 ID(G-로 시작)를 넣으면 세기 시작함. 세 페이지(메인·price·move) 같이 고칠 것.
      사장님 기기는 주소 끝에 #nocount 를 붙여 한 번 열면 그 브라우저 방문은 안 셈 (#count 로 되돌림) -->

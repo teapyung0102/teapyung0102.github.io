@@ -365,6 +365,22 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
   .colors .full .swatches{grid-template-columns:repeat(11,minmax(0,1fr))}
 }
 @media (prefers-reduced-motion:reduce){html.smooth{scroll-behavior:auto}}
+
+/* 정렬 체계 (2026-10-18, 참고: 뮤트홈·사운드블럭): 칸 제목과 짧은 카드 글은 가운데,
+   긴 목록(다른 점·자주 묻는 질문)·신청 상자·표 안 글은 읽기 쉽게 왼쪽 그대로 */
+.head{align-items:center;text-align:center}
+.head p{margin-inline:auto}
+.about-pd{align-self:center}
+.booth-body{text-align:center;align-items:center}
+.price{justify-content:center}
+.diff-more{text-align:center}
+.ctabs{margin-inline:auto}
+.case,.vid,.short{text-align:center}
+.cbtn{align-items:center;text-align:center}
+@media (min-width:720px){
+  .more-btn{display:flex;width:max-content;margin-inline:auto}
+  .case-links{justify-content:center}
+}
 </style>
 <!-- 방문자 수 (구글 애널리틱스). GA_ID에 측정 ID(G-로 시작)를 넣으면 세기 시작함. 세 페이지(메인·price·move) 같이 고칠 것.
      사장님 기기는 주소 끝에 #nocount 를 붙여 한 번 열면 그 브라우저 방문은 안 셈 (#count 로 되돌림) -->

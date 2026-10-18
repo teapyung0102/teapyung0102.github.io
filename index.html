@@ -270,8 +270,6 @@ section{padding-block:56px}
 .fader .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 1.2s ease-in-out}
 .fader .slide.on{opacity:1}
 .fader img{width:100%;height:100%;object-fit:cover;display:block}
-.ph-t{text-align:center;line-height:1.5}
-.ph-t small{font-size:11px;opacity:.75}
 .fader.has{border-style:solid;border-color:transparent}
 @media (prefers-reduced-motion:reduce){.fader .slide{transition:none}}
 
@@ -375,7 +373,7 @@ footer .flinks a{text-decoration:underline;text-underline-offset:3px}
 /* 시공사례 */
 .cases{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
 .case{display:flex;flex-direction:column;gap:6px}
-.case .ph{aspect-ratio:4/3;border:1.5px dashed #BDB3A2;font-size:13px}
+.case .ph{aspect-ratio:4/3;background:var(--ground-2)}
 .case b{font-size:16px;margin-top:4px}
 .case span{font-size:13px;color:var(--ink-3)}
 .case em{font-style:normal;font-size:13px;font-weight:600;color:var(--dawn-ink)}
@@ -581,7 +579,8 @@ body{font-size:17px;line-height:1.7}
 
 <main id="top">
   <section class="hero dark">
-    <div class="ph fader" data-photo="hero" aria-label="대표 시공 사진"><span class="ph-t">[대표 사진]<br><small>photos/hero 폴더</small></span></div>
+    <!-- 로딩 중 빈칸 대신 첫 대표 사진을 바로 보여줌 (사진 목록을 불러오면 같은 사진부터 돌아감). hero 폴더 첫 사진이 바뀌면 여기도 -->
+    <div class="ph fader" data-photo="hero" aria-label="대표 시공 사진"><img src="photos/hero/20260129_190922(1).jpg" alt="" fetchpriority="high"></div>
     <div class="wrap">
       <div class="hero-copy">
         <h1>새벽처럼 고요한 방음<br>새벽방음입니다<svg class="moon" viewBox="0 0 18.95 18.95" aria-hidden="true"><defs><linearGradient id="moonG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset="1" stop-color="#F0A93B"/></linearGradient></defs><path fill="url(#moonG)" d="M5.53 0A10 10 0 1 0 18.95 13.41A9.7 9.7 0 0 1 5.53 0Z"/></svg></h1>
@@ -715,9 +714,9 @@ body{font-size:17px;line-height:1.7}
       <div class="cpanel" id="cp-photo" role="tabpanel" aria-labelledby="ct-photo">
         <div class="cases">
           <!-- 최신순: case1(가장 최신) → case2 → case3. 새 사례가 생기면 한 칸씩 밀어서 3개만 둔다 -->
-          <a class="case" href="https://blog.naver.com/saebyeok0711/224427447792" target="_blank" rel="noopener"><div class="ph fader" data-photo="case1"><span class="ph-t">[시공 사진]<br><small>photos/case1 폴더</small></span></div><b>[동탄] 방송용 방음부스</b><span>지식산업센터 · 슈퍼싱글부스 · 2.2평</span></a>
-          <a class="case" href="https://blog.naver.com/saebyeok0711/224427448299" target="_blank" rel="noopener"><div class="ph fader" data-photo="case2"><span class="ph-t">[시공 사진]<br><small>photos/case2 폴더</small></span></div><b>[안양] 교습소 방음부스 이전·증축</b><span>상가 2층 · 슈퍼싱글부스 · 3.3평</span></a>
-          <div class="case"><div class="ph fader" data-photo="case3"><span class="ph-t">[시공 사진]<br><small>photos/case3 폴더</small></span></div><b>[제천] 게임·취미용 방음부스</b><span>아파트 · 슈퍼싱글부스 · 1.5평</span></div>
+          <a class="case" href="https://blog.naver.com/saebyeok0711/224427447792" target="_blank" rel="noopener"><div class="ph fader" data-photo="case1"></div><b>[동탄] 방송용 방음부스</b><span>지식산업센터 · 슈퍼싱글부스 · 2.2평</span></a>
+          <a class="case" href="https://blog.naver.com/saebyeok0711/224427448299" target="_blank" rel="noopener"><div class="ph fader" data-photo="case2"></div><b>[안양] 교습소 방음부스 이전·증축</b><span>상가 2층 · 슈퍼싱글부스 · 3.3평</span></a>
+          <div class="case"><div class="ph fader" data-photo="case3"></div><b>[제천] 게임·취미용 방음부스</b><span>아파트 · 슈퍼싱글부스 · 1.5평</span></div>
           <!-- TODO: 제천 사례 블로그 글을 쓰면 위 div를 다른 사례처럼 <a class="case" href="블로그주소" target="_blank" rel="noopener">로 바꾸기 -->
         </div>
       </div>

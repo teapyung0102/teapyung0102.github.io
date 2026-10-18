@@ -27,6 +27,8 @@
 - 도메인: https://saebyeok0711.co.kr (CNAME 파일). `robots.txt`, `sitemap.xml` 있음 — 내용을 크게 바꾸면 sitemap의 lastmod 날짜도 갱신.
 - 네이버 서치어드바이저·구글 서치콘솔 소유 확인 코드(meta 태그)는 index.html `<head>`의 "검색엔진 소유 확인" 주석 아래에 넣는다.
 - simulator.html은 iframe 전용이라 `noindex`.
+- 업체 정보 꼬리표(구조화 데이터, 2026-10-18, AI 검색·GEO용): 세 페이지 <head>의 jsonld:start~end 사이. 직접 고치지 말고
+  자주 묻는 질문·부스 가격·연락처를 바꾼 뒤 `python3 .claude/make-jsonld.py` 실행(화면 내용을 읽어 다시 만듦). 업체 주소·전화는 그 파일 BUSINESS에.
 - 검색 결과 이름·아이콘(2026-10-16): 메인 `<head>`의 WebSite 구조화 데이터(name "새벽방음")가 구글 사이트 이름, 세 페이지의 favicon(.ico/.svg/-96.png, apple-touch-icon)이 검색 결과 아이콘.
   아이콘 원본은 `favicon.svg`(로고 주황 링+해). 다음 검색엔진(카카오)은 사이트 등록돼 있음("새벽방음"으로 뜸).
 - 방문자 수: 구글 애널리틱스(GA4). 세 페이지(메인·price·move) `</head>` 바로 위 스크립트의 `GA_ID`에 측정 ID(G-…)를 넣으면 셈.

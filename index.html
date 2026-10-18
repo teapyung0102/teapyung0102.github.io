@@ -66,7 +66,7 @@ section{padding-block:56px}
 .head p{color:var(--ink-2);max-width:40em}
 .dark .head p{color:var(--night-sub)}
 .note{font-size:13px;color:var(--ink-3)}
-.sim-help{display:grid;gap:4px}
+.sim-help{display:grid;gap:4px;text-align:center}
 .sim-help b{color:var(--ink-2)}
 .dark{background:var(--night);color:var(--night-text)}
 .tint{background:var(--ground-2)}
@@ -175,7 +175,7 @@ section{padding-block:56px}
 .booth{background:var(--card);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
 .booth-body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
 .booth h3{font-size:22px}
-.booth p{font-size:15px;line-height:1.7;color:var(--ink-2)}
+.booth p{font-size:16px;line-height:1.6;color:var(--ink-2)}
 .price{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
 .price b{font-size:26px}
 .price span{color:var(--ink-3);font-size:15px}
@@ -474,14 +474,13 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
       <div class="head">
         <div class="eyebrow">방음부스 미리보기</div>
         <h2>우리 방에 들어갈 부스를 미리 그려보세요</h2>
-        <p>크기를 넣으면 예상 가격이 바로 나와요. 가장 많이 쓰는 마감재만 고를 수 있고, 더 자세한 설정은 실측 때 함께 정해요.</p>
+        <p>크기를 넣으면 예상 가격이 바로 나와요.</p>
       </div>
       <div class="sim-slot">
         <iframe class="sim-frame" id="sim-frame" src="simulator.html?v=20261018-1" title="방음부스 미리보기" loading="lazy" allow="clipboard-write"></iframe>
+        <!-- 사용법은 시뮬레이터 화면 안에 폰·PC 맞춰 이미 떠서 한 줄만 -->
         <div class="note sim-help">
-          <p><b>모바일 :</b> 한 손가락으로 끌어서 돌리고, 두 손가락으로 벌려서 확대해요. 벽을 터치하면 타공판을 놓거나 뺄 수 있어요.</p>
-          <p><b>데스크탑 :</b> 마우스로 끌어서 돌리고, 스크롤로 확대해요. 벽을 클릭하면 타공판을 놓거나 뺄 수 있어요.</p>
-          <p>실제 시공은 실측 후 확정돼요.</p>
+          <p>마감재는 많이 쓰는 것만 골라 두었어요. 실제 크기·금액은 실측 후 확정돼요.</p>
         </div>
       </div>
     </div>
@@ -498,21 +497,21 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         <article class="booth">
           <div class="booth-body">
             <h3>싱글부스</h3>
-            <p>통기타, 인터넷방송, 공부방 등에 맞는 기본형. 흡음재 60mm 1겹.</p>
+            <p>통기타 · 인터넷방송 · 공부방</p>
             <div class="price"><b>308만원</b><span>부터</span><small>0.5평 · 부가세 포함</small></div>
           </div>
         </article>
         <article class="booth">
           <div class="booth-body">
             <h3>슈퍼싱글부스</h3>
-            <p>녹음, 보컬, 악기 연습, 미디 작업까지. 가성비와 성능을 모두 갖춘 올라운드 방음부스. 12.5mm 차음석고에 흡음재 60mm.</p>
+            <p>보컬 · 악기 연습 · 미디 작업</p>
             <div class="price"><b>388만원</b><span>부터</span><small>0.5평 · 부가세 포함</small></div>
           </div>
         </article>
         <article class="booth">
           <div class="booth-body">
             <h3>더블부스</h3>
-            <p>성악·관악기·드럼처럼 큰 소리부터, 바깥 소음 없이 집중해야 하는 믹싱·마스터링까지. 슈퍼싱글 안에 싱글부스를 한 번 더 넣고 사이에 에어갭과 문 2개를 둔 최고 성능의 이중 구조.</p>
+            <p>드럼 · 관악기 · 성악 · 믹싱</p>
             <div class="price"><b>682만원</b><span>부터</span><small>1평 · 부가세 포함</small></div>
           </div>
         </article>
@@ -528,7 +527,7 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
       <div class="head">
         <div class="eyebrow">새벽방음이 다른 점</div>
         <h2>보이지 않는 곳까지<br>다르게 짓습니다</h2>
-        <p>다 지은 부스는 겉으로 보면 다 비슷해요. 차이는 바닥 밑, 벽 속, 마감 한 줄에서 납니다.</p>
+        <p>차이는 바닥 밑, 벽 속, 마감 한 줄에서 납니다.</p>
       </div>
       <ul class="diffs">
         <li class="diff"><details><summary><h3>바닥을 띄워서 짓습니다</h3></summary><p>고무 → 흡음재 → 바닥판, 3단으로 바닥을 띄워요. 아래층으로 가는 울림을 줄이고, 방 바닥과 사이에 공기가 통해 곰팡이와 바닥 변색을 막아요.</p></details></li>
@@ -670,7 +669,7 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         </ul>
         <div class="notice">
           <b>꼭 확인해 주세요</b>
-          <p>전화나 카톡으로는 <strong>대략적인 간단 견적</strong>만 가능해요. 방마다 문·콘센트·전등·스프링클러·에어컨 위치가 달라서, <strong>공사 전에는 반드시 실측</strong>을 거쳐 최종 견적을 확정합니다.</p>
+          <p>카톡 견적은 <strong>대략적인 금액</strong>이에요. 방마다 문·콘센트·에어컨 위치가 달라서 <strong>최종 금액은 실측 후 확정</strong>해요.</p>
           <a href="#measure">실측신청 보기 →</a>
         </div>
         <div class="row-btns">

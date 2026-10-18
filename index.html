@@ -297,10 +297,15 @@ a.case:hover b{text-decoration:underline}
 .checks{margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:15px;color:var(--ink-2)}
 .checks li{display:flex;gap:10px;align-items:flex-start}
 .checks svg{flex:none;margin-top:4px;color:var(--dawn-ink)}
-.steps{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:s}
-.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--ink-2)}
-.steps li::before{content:counter(s);flex:none;width:28px;height:28px;border-radius:50%;background:var(--night);color:var(--night-text);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
-.steps b{display:block;color:var(--ink);font-size:16px}
+/* 실측 과정 아이콘 4단계 */
+.flow{margin:4px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;text-align:center}
+.flow li{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px}
+.flow li + li::before{content:'';position:absolute;left:-4px;top:23px;width:7px;height:7px;border-top:2px solid #C9BFB0;border-right:2px solid #C9BFB0;transform:translate(-60%,-50%) rotate(45deg)}
+.fi{width:46px;height:46px;border-radius:50%;background:#FBF1E8;border:1px solid #EFCFB4;display:flex;align-items:center;justify-content:center;margin-bottom:2px}
+.fi svg{width:22px;height:22px;fill:none;stroke:var(--dawn-ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.flow b{font-size:14px;line-height:1.3;color:var(--ink);white-space:nowrap}
+.flow small{font-size:12px;line-height:1.3;color:var(--ink-3);white-space:nowrap}
+.flow-note{font-size:14px;line-height:1.7;color:var(--ink-2)}
 .notice{padding:16px 18px;background:#FBF1E8;border:1px solid #EFCFB4;border-radius:12px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.7;color:var(--ink-2)}
 .notice b{color:var(--dawn-ink);font-size:14px}
 .notice strong{color:var(--ink)}
@@ -680,12 +685,14 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
       <div id="measure" class="box">
         <div class="eyebrow">실측신청</div>
         <h3>공사 전 실측은 필수예요</h3>
-        <ol class="steps">
-          <li><div><b>실측 신청</b>카톡이나 전화·문자로 주소와 편한 날짜를 알려주세요.</div></li>
-          <li><div><b>방문 실측</b>방 치수뿐 아니라 문, 콘센트, 전등, 스프링클러, 에어컨 위치까지 부스와 겹치지 않게 하나하나 정확히 확인해야 할 게 많아요. 그래서 직접 가서 재고 확인합니다.</div></li>
-          <li><div><b>도면 · 견적</b>공간에 맞춘 도면과 최종 견적을 드려요.</div></li>
-          <li><div><b>시공</b>일정을 잡고 직접 시공합니다.</div></li>
+<!-- 실측 과정: 글 대신 아이콘 4단계 (참고: 뮤트홈 시공 프로세스) -->
+        <ol class="flow">
+          <li><span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 20.5l1.4-5.1A8.5 8.5 0 1 1 21 11.5z"/></svg></span><b>신청</b><small>카톡·전화</small></li>
+          <li><span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 16.5 16.5 3.5l4 4-13 13z"/><path d="M7.5 12.5l2 2M10.5 9.5l1.5 1.5M13.5 6.5l2 2"/></svg></span><b>방문 실측</b><small>직접 재요</small></li>
+          <li><span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z"/><path d="M9 9.5h6M9 13h6M9 16.5h4"/></svg></span><b>도면·견적</b><small>최종 금액</small></li>
+          <li><span class="fi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.2L3.5 17.4l3.1 3.1 5.7-5.7a4 4 0 0 0 5.2-5.3l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span><b>시공</b><small>대표 직접</small></li>
         </ol>
+        <p class="flow-note">방문 실측 때 방 치수뿐 아니라 문·콘센트·전등·스프링클러·에어컨 위치까지 부스와 겹치지 않게 하나하나 확인해요.</p>
         <div class="notice">
           <b>실측 비용 10만원</b>
           <p>공사를 맡겨주시면 <strong>공사 완료 후 실측 비용을 전액 돌려</strong>드려요.</p>

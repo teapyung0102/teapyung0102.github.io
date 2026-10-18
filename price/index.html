@@ -15,13 +15,16 @@
 <meta property="og:title" content="방음부스 가격 — 크기별 가격 공개 | 새벽방음">
 <meta property="og:description" content="0.5평 싱글 308만원부터, 부가세·설치비 포함. 크기별 가격을 투명하게 공개합니다.">
 <meta property="og:url" content="https://saebyeok0711.co.kr/price/">
-<meta property="og:image" content="https://saebyeok0711.co.kr/og.jpg?v=20261014-3">
+<meta property="og:image" content="https://saebyeok0711.co.kr/og.jpg?v=20261018">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@700;900&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<!-- 본문·제목: Pretendard (2026-10-18, 가독성 좋은 고딕). 명조는 로고 "새벽방음" 네 글자에만 씀 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@900&text=%EC%83%88%EB%B2%BD%EB%B0%A9%EC%9D%8C&display=swap">
 <style>
 /* 메인(index.html)과 같은 색·글꼴·부품을 쓴다. 메인 디자인을 바꾸면 여기도 맞출 것 */
 :root{
@@ -30,7 +33,7 @@
   --ground:#F5F1EA; --ground-2:#ECE6DB; --card:#FFFFFF; --line:#E3DCD0;
   --ink:#1C1E26; --ink-2:#4A4C55; --ink-3:#6A6C74;
   --serif:'Noto Serif KR','Nanum Myeongjo',serif;
-  --sans:'IBM Plex Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --sans:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
   --gutter:16px;
 }
 *{box-sizing:border-box}
@@ -41,7 +44,7 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
 a{color:inherit;text-decoration:none}
 a:focus-visible{outline:3px solid var(--dawn);outline-offset:3px;border-radius:6px}
 h1,h2,h3{margin:0}
-h1,h2{font-family:var(--serif);font-weight:900;letter-spacing:-.02em;text-wrap:balance}
+h1,h2{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;text-wrap:balance}
 p{margin:0}
 p,li,h3,.note{text-wrap:pretty}
 .wrap{max-width:1160px;margin:0 auto;padding-inline:var(--gutter)}
@@ -78,7 +81,7 @@ section{padding-block:56px}
 .crumb a{color:var(--night-sub);text-decoration:underline;text-underline-offset:3px}
 .hero h1{font-size:clamp(30px,5.4vw,54px);line-height:1.25}
 .nw{white-space:nowrap}
-.hero .lead{font-family:var(--serif);font-weight:700;font-size:clamp(19px,2.4vw,24px);color:var(--dawn)}
+.hero .lead{font-family:var(--sans);font-weight:700;font-size:clamp(19px,2.4vw,24px);color:var(--dawn)}
 .hero p.desc .hl{color:var(--night-text)}
 .hero p.desc{font-size:clamp(16px,1.8vw,18px);line-height:1.75;color:var(--night-sub);max-width:32em}
 .btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}

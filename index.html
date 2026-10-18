@@ -19,19 +19,22 @@
 <meta property="og:title" content="새벽방음 | 조립식 고정형 방음부스 제작·시공">
 <meta property="og:description" content="현직 음악PD가 직접 제작·시공하는 맞춤 방음부스. 월세·전세집에도 시공해요.">
 <meta property="og:url" content="https://saebyeok0711.co.kr/">
-<meta property="og:image" content="https://saebyeok0711.co.kr/og.jpg?v=20261014-3">
+<meta property="og:image" content="https://saebyeok0711.co.kr/og.jpg?v=20261018">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="새벽처럼 고요한 방음, 새벽방음입니다">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://saebyeok0711.co.kr/og.jpg?v=20261014-3">
+<meta name="twitter:image" content="https://saebyeok0711.co.kr/og.jpg?v=20261018">
 <meta property="og:locale" content="ko_KR">
 <!-- 검색엔진 소유 확인: 네이버 서치어드바이저·구글 서치콘솔에서 받은 코드를 여기에 넣는다 -->
 <meta name="naver-site-verification" content="fb830cdd23efc989cf359ad6b8a3cb6c835abea4" />
 <meta name="google-site-verification" content="6nFqqDXVDZ5gMvwIluY4yvzICXewrkvv7cxX3t2krSQ" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@700;900&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<!-- 본문·제목: Pretendard (2026-10-18, 가독성 좋은 고딕). 명조는 로고 "새벽방음" 네 글자에만 씀 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@900&text=%EC%83%88%EB%B2%BD%EB%B0%A9%EC%9D%8C&display=swap">
 <style>
 :root{
   --night:#171A28; --night-2:#262A3C; --night-line:#4A4F66; --night-text:#F5F1EA; --night-sub:#C9C4BA; --night-mute:#8A8FA3;
@@ -39,7 +42,7 @@
   --ground:#F5F1EA; --ground-2:#ECE6DB; --card:#FFFFFF; --line:#E3DCD0;
   --ink:#1C1E26; --ink-2:#4A4C55; --ink-3:#6A6C74; --ph:#DCD4C6; --ph-text:#7E786C;
   --serif:'Noto Serif KR','Nanum Myeongjo',serif;
-  --sans:'IBM Plex Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --sans:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
   --gutter:16px;
 }
 *{box-sizing:border-box}
@@ -50,7 +53,7 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
 a{color:inherit;text-decoration:none}
 a:focus-visible{outline:3px solid var(--dawn);outline-offset:3px;border-radius:6px}
 h1,h2,h3{margin:0}
-h1,h2{font-family:var(--serif);font-weight:900;letter-spacing:-.02em;text-wrap:balance}
+h1,h2{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;text-wrap:balance}
 p{margin:0}
 body{word-break:keep-all;overflow-wrap:break-word}
 p,li,h3,h4,.note{text-wrap:pretty}
@@ -96,8 +99,8 @@ section{padding-block:56px}
 .hero-copy{display:flex;flex-direction:column;gap:16px}
 .hero h1{font-size:clamp(30px,8.2vw,56px);line-height:1.3;text-shadow:0 2px 16px rgba(0,0,0,.35)}
 /* 제목 끝 달: 폰마다 다르게 보이는 이모지 대신 얇은 초승달 그림 (어느 폰에서나 같게).
-   글자 키(기준선 위 .86em·아래 .115em)에 맞춰 높이 .92em, 글자 가운데에 오게 내림 */
-.hero h1 .moon{display:inline-block;width:.92em;height:.92em;margin-left:.1em;vertical-align:-.09em}
+   Pretendard 글자 키(기준선 위 .8em·아래 .09em)에 맞춰 높이 .84em, 글자 가운데에 오게 내림 */
+.hero h1 .moon{display:inline-block;width:.84em;height:.84em;margin-left:.1em;vertical-align:-.06em}
 .hero .lead{font-size:clamp(17px,4.6vw,22px);font-weight:600;line-height:1.5;color:#fff;text-wrap:balance}
 .hero-price{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
   background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:15px;
@@ -140,7 +143,7 @@ section{padding-block:56px}
 /* 위 회사소개 글과 떨어진 덩어리로: 여백 + 가운데 주황 선 + 가운데 정렬 큰 제목 */
 .cmp{margin-top:48px;text-align:center}
 .cmp::before{content:'';display:block;width:40px;height:3px;border-radius:2px;background:var(--dawn);margin:0 auto 22px}
-.cmp-t{font-family:var(--serif);font-weight:900;font-size:clamp(23px,3vw,30px);line-height:1.35;letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance}
+.cmp-t{font-family:var(--sans);font-weight:800;font-size:clamp(23px,3vw,30px);line-height:1.35;letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance}
 .cmp-d{margin:0 auto 20px;max-width:34em;font-size:15px;line-height:1.6;color:var(--ink-2)}
 .cmp-d b{color:var(--ink);white-space:nowrap}
 .cmp-d .nw{white-space:nowrap}
@@ -262,7 +265,7 @@ a.case:hover b{text-decoration:underline}
 /* 부스 이전 배너: 안양 이전 현장 사진 위에 한 줄 */
 .move-band{padding-block:56px;background:linear-gradient(rgba(23,26,40,.78),rgba(23,26,40,.78)),url(photos/case2/anyang-1.jpg) center/cover}
 .move-band .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}   /* 짧은 제목+한 줄+버튼이라 가운데 */
-.move-band h2{font-family:var(--serif);font-size:clamp(26px,6vw,36px);line-height:1.3}
+.move-band h2{font-family:var(--sans);font-size:clamp(26px,6vw,36px);line-height:1.3}
 .move-band p{color:var(--night-sub);font-size:15px;line-height:1.7}
 .move-band .btn{margin-top:10px}
 @media (min-width:720px){.move-band{padding-block:72px}}
@@ -458,7 +461,7 @@ footer .logo{font-size:16px;color:#D9D4CA;margin-bottom:4px}
         <p>크기를 넣으면 예상 가격이 바로 나와요. 가장 많이 쓰는 마감재만 고를 수 있고, 더 자세한 설정은 실측 때 함께 정해요.</p>
       </div>
       <div class="sim-slot">
-        <iframe class="sim-frame" id="sim-frame" src="simulator.html?v=20261013-2" title="방음부스 미리보기" loading="lazy" allow="clipboard-write"></iframe>
+        <iframe class="sim-frame" id="sim-frame" src="simulator.html?v=20261018-1" title="방음부스 미리보기" loading="lazy" allow="clipboard-write"></iframe>
         <div class="note sim-help">
           <p><b>모바일 :</b> 한 손가락으로 끌어서 돌리고, 두 손가락으로 벌려서 확대해요. 벽을 터치하면 타공판을 놓거나 뺄 수 있어요.</p>
           <p><b>데스크탑 :</b> 마우스로 끌어서 돌리고, 스크롤로 확대해요. 벽을 클릭하면 타공판을 놓거나 뺄 수 있어요.</p>

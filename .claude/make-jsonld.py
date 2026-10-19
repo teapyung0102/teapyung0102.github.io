@@ -18,7 +18,7 @@ BUSINESS = {
     '@type': 'HomeAndConstructionBusiness',
     '@id': BIZ_ID,
     'name': '새벽방음',
-    'description': '현직 음악PD가 직접 제작·시공하는 조립식 고정형 방음부스. 방 크기에 맞춰 mm 단위로 설계하고, 집 손상을 최소화해 월세·전세집에도 시공해요.',
+    'description': '경기 안산에 본사를 둔 방음부스 업체. 현직 음악PD가 직접 제작·시공하는 조립식 고정형 방음부스. 방 크기에 맞춰 mm 단위로 설계하고, 집 손상을 최소화해 월세·전세집에도 시공해요.',
     'url': SITE,
     'logo': SITE + 'apple-touch-icon.png',
     'image': SITE + 'og.jpg',

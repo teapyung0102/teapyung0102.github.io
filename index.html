@@ -285,8 +285,9 @@ section{padding-block:56px}
 .cmp{margin-top:48px;text-align:center}
 .cmp::before{content:'';display:block;width:40px;height:3px;border-radius:2px;background:var(--dawn);margin:0 auto 22px}
 .cmp-t{font-family:var(--sans);font-weight:800;font-size:clamp(23px,3vw,30px);line-height:1.35;letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance}
-.cmp-d{margin:0 auto 20px;max-width:34em;font-size:15px;line-height:1.6;color:var(--ink-2)}
-.cmp-d b{color:var(--ink);white-space:nowrap}
+/* "쉽게 말하면 … 방 속의 방" 은 이 칸의 핵심이라 크게·굵게, '방 속의 방'은 회사소개 키워드처럼 형광펜 */
+.cmp-d{margin:0 auto 22px;max-width:28em;font-size:clamp(18px,2.2vw,24px);line-height:1.55;font-weight:600;color:var(--ink);text-wrap:balance}
+.cmp-d b{color:var(--dawn-ink);font-weight:800;background:linear-gradient(transparent 60%,#F6DCC4 60%);padding:0 2px;white-space:nowrap}
 .cmp-d .nw{white-space:nowrap}
 .cmp table{width:100%;max-width:820px;margin:0 auto;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15px;table-layout:fixed}
 .cmp th,.cmp td{padding:15px 4px;text-align:center;vertical-align:middle;border-bottom:1px solid var(--line);line-height:1.35}
@@ -608,7 +609,7 @@ body{font-size:17px;line-height:1.7}
            ○·× 는 폰마다 다르게 보이지 않게 그림(svg). 조립식 자체가 샌다는 인상을 주지 않게 방음은 모두 ○ -->
       <div class="cmp">
         <h3 class="cmp-t">조립식 고정형 방음부스, 무엇이 다른가요?</h3>
-        <p class="cmp-d">쉽게 말하면, 방 안에 우리 방 크기에 꼭 맞는 <b>‘방 속의 방’</b>을 <span class="nw">하나 더 짓는 거예요.</span></p>
+        <p class="cmp-d">쉽게 말하면, 방 안에 우리 방 크기에 <span class="nw">꼭 맞는</span> <b>‘방 속의 방’</b>을 <span class="nw">하나 더 짓는 거예요.</span></p>
         <table>
           <thead><tr><th><span class="sr">항목</span></th><th>간편 조립식</th><th class="ours">새벽방음</th><th>고정형 공사</th></tr></thead>
           <tbody>

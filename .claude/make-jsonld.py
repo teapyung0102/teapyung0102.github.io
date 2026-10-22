@@ -51,7 +51,7 @@ def faq_page(src, url):
 
 
 def booth_offers(src):
-    """메인 부스 카드(이름 · 용도 한 줄 · 'OOO만원 부터' · '0.5평 · 부가세 포함')를 그대로 읽는다."""
+    """메인 부스 카드(이름 · 용도 한 줄 · 'OOO만원 부터' · '1평 · 부가세 포함')를 그대로 읽는다."""
     offers = []
     for m in re.finditer(r'<article class="booth">(.*?)</article>', src, re.S):
         card = m.group(1)

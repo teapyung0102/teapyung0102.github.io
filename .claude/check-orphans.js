@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 (async()=>{const b=await chromium.launch({proxy:{server:process.env.HTTPS_PROXY},args:['--ignore-certificate-errors']});
-for (const f of ['index.html','simulator.html','move/index.html','price/index.html']) for (const w of [360,375,390,412,768,1024,1280,1440]){
+for (const f of ['index.html','simulator.html','move/index.html','price/index.html','link/index.html']) for (const w of [360,375,390,412,768,1024,1280,1440]){
 const p=await b.newPage({viewport:{width:w,height:900}});await p.goto('file://'+process.cwd()+'/'+f);await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(800);
 // 접힌 질문(details)·탭 안 내용도 검사하도록 모두 펼친다
 await p.evaluate(()=>{document.querySelectorAll('details').forEach(d=>d.open=true);document.querySelectorAll('[role=tabpanel][hidden]').forEach(e=>e.hidden=false);});await p.waitForTimeout(300);

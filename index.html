@@ -355,7 +355,9 @@ section{padding-block:56px}
 footer .flinks a{text-decoration:underline;text-underline-offset:3px}
 .diff-more a{color:var(--dawn);font-weight:600}
 @media (min-width:720px){.diffs{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1000px){.diffs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* 5칸이라 마지막 줄이 비지 않게: 2열이면 마지막 칸을 가로 가득, 3열이면 아래 2칸을 가운데로 */
+@media (min-width:720px) and (max-width:999px){.diff:last-child:nth-child(odd){grid-column:1/-1}}
+@media (min-width:1000px){.diffs{grid-template-columns:repeat(6,minmax(0,1fr))}.diff{grid-column:span 2}.diff:nth-child(4):nth-last-child(2){grid-column:2/span 2}}
 .faq + .faq{margin-top:10px}
 .faqs{margin-bottom:40px}
 .faqs .faq:first-child{margin-top:0}
@@ -690,7 +692,6 @@ body{font-size:17px;line-height:1.7}
         <li class="diff"><details><summary><h3>바닥을 띄워서 짓습니다</h3></summary><p>고무 → 흡음재 → 바닥판, 3단으로 바닥을 띄워요. 아래층으로 가는 울림을 줄이고, 방 바닥과 사이에 공기가 통해 곰팡이와 바닥 변색을 막아요.</p></details></li>
         <li class="diff"><details><summary><h3>바닥에 자국을 남기지 않아요</h3></summary><p>고무가 바닥에 바로 닿으면 물이 들 수 있어서 보강재를 한 겹 더 대요. 철거하거나 이사 갈 때도 바닥이 그대로라 월세·전세집도 안심이에요.</p></details></li>
         <li class="diff"><details><summary><h3>카펫 대신 본드 없는 강화마루</h3></summary><p>카펫은 시간이 지나면 냄새가 배고 청소가 어려워요. 일반 가정집보다 두꺼운 강화마루를 접착제 없이 깔아서 냄새가 적고, 옮길 때 다시 쓸 수 있어요.</p></details></li>
-        <li class="diff"><details><summary><h3>E0 등급 목재만 씁니다</h3></summary><p>흔히 쓰는 E1 등급보다 포름알데히드가 3분의 1 수준인 E0 등급 자재로 뼈대와 바닥판을 만들어요. 오래 머무는 작은 방이니까요.</p></details></li>
         <li class="diff"><details><summary><h3>옮기고, 늘리고, 더할 수 있어요</h3></summary><p>이사할 때 해체해서 새 집에 다시 지어요. 옮기면서 크기를 늘리거나, 다 쓰던 부스에 창문만 더 다는 것도 할 수 있어요.</p><a class="diff-link" href="move/">이전·증축·철거 자세히 보기 →</a></details></li>
         <li class="diff"><details><summary><h3>음악PD가 처음부터 끝까지</h3></summary><p>상담·실측·도면·시공부터 A/S까지 대표가 직접 전담해요. 소리가 어디로 새는지, 부스 안에서 소리가 어떻게 들려야 하는지 아는 사람이 실리콘 한 줄까지 마무리합니다.</p></details></li>
       </ul>

@@ -51,18 +51,21 @@ def faq_page(src, url):
 
 
 def booth_offers(src):
-    """메인 부스 카드(이름 · 용도 한 줄 · 'OOO만원 부터' · '1평 · 부가세 포함')를 그대로 읽는다."""
+    """메인 부스 카드(이름 · 용도 한 줄 · 'OOO만원 부터' · '1평 · 부가세 별도' · '부가세 포함 OOO만원')를 그대로 읽는다.
+    화면엔 부가세 별도가 크게 먼저 나오지만, 꼬리표의 minPrice는 손님이 실제 내는 부가세 포함 금액으로 둔다."""
     offers = []
     for m in re.finditer(r'<article class="booth">(.*?)</article>', src, re.S):
         card = m.group(1)
         name = text(re.search(r'<h3>(.*?)</h3>', card).group(1))
         use = text(re.search(r'<p>(.*?)</p>', card).group(1))
-        man = int(re.search(r'<b>(\d+)만원</b>', card).group(1))
-        basis = text(re.search(r'<small>(.*?)</small>', card).group(1))
-        offers.append({'@type': 'Offer', 'name': name, 'description': f'{use} ({basis}, {man}만원부터)',
-                       'priceSpecification': {'@type': 'PriceSpecification', 'minPrice': man * 10000,
+        sep = int(re.search(r'<b>(\d+)만원</b>', card).group(1))
+        inc = int(re.search(r'부가세 포함 (\d+)만원', card).group(1))
+        size = text(re.search(r'<small>(.*?)</small>', card).group(1)).split('·')[0].strip()
+        offers.append({'@type': 'Offer', 'name': name,
+                       'description': f'{use} ({size} 기준 부가세 별도 {sep}만원부터, 부가세 포함 {inc}만원부터)',
+                       'priceSpecification': {'@type': 'PriceSpecification', 'minPrice': inc * 10000,
                                               'priceCurrency': 'KRW', 'valueAddedTaxIncluded': True},
-                       'url': SITE + 'price/'})
+                       'url': SITE + 'price/', '_sep': sep})
     return offers
 
 
@@ -75,7 +78,10 @@ def graph(path, src):
         biz = dict(BUSINESS)
         offers = booth_offers(src)
         if offers:
-            biz['priceRange'] = f"{min(o['priceSpecification']['minPrice'] for o in offers) // 10000}만원부터 (부가세 포함)"
+            biz['priceRange'] = (f"{min(o['_sep'] for o in offers)}만원부터 (부가세 별도) · "
+                                 f"{min(o['priceSpecification']['minPrice'] for o in offers) // 10000}만원부터 (부가세 포함)")
+            for o in offers:
+                del o['_sep']
             biz['makesOffer'] = offers
         g.append(biz)
     elif path == 'move/index.html':
